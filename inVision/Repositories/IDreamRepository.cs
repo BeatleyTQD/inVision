@@ -5,6 +5,9 @@ namespace inVision.Repositories
 {
     public interface IDreamRepository
     {
-        List<Dream> GetActiveDreams();
+        List<Dream> GetActiveDreams(int userProfileId);
+        Dream GetById(int id);
+        public void Add(Dream dream);
+        public void DeactivateDream(int dreamId, int userProfileId);
     }
 }
