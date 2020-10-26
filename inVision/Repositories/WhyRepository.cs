@@ -51,6 +51,47 @@ namespace inVision.Repositories
                 }
             }
         }
+        public Why GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT w.Id AS WhyId, w.Description, w.DreamId, d.Name, d.IsDeactivated, d.UserProfileId
+                                         FROM Why w
+                                         JOIN Dream d ON w.DreamId = d.Id
+                                        WHERE w.Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Why why = new Why()
+                        {
+                            Id = DbUtils.GetInt(reader, "WhyId"),
+                            Description = DbUtils.GetString(reader, "Description"),
+                            DreamId = DbUtils.GetInt(reader, "DreamId"),
+                            Dream = new Dream()
+                            {
+                                Id = DbUtils.GetInt(reader, "DreamId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                IsDeactivated = DbUtils.GetInt(reader, "IsDeactivated"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            }
+                        };
+                        reader.Close();
+                        return why;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
 
         public void Add(Why why)
         {
@@ -69,5 +110,39 @@ namespace inVision.Repositories
                 }
             }
         }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Why WHERE Id = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Update(Why why)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Why 
+                                           SET Description = @description
+                                         WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@description", why.Description);
+                    cmd.Parameters.AddWithValue("@id", why.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

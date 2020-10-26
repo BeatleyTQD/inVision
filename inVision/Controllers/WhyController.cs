@@ -34,11 +34,45 @@ namespace inVision.Controllers
             return Ok(_whyRepository.GetWhysForDream(id, userId));
         }
 
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            UserProfile user = GetCurrentUserProfile();
+            int userId = user.Id;
+
+            var why = _whyRepository.GetById(id);
+            if (why == null)
+            {
+                return NotFound();
+            }
+
+            if (why.Dream.UserProfileId != userId)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(why);
+        }
+
         [HttpPost]
         public IActionResult Post(Why why)
         {
             _whyRepository.Add(why);
             return CreatedAtAction("Get", new { id = why.Id }, why);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _whyRepository.Delete(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public void Put(Why why)
+        {
+            _whyRepository.Update(why);
         }
     }
 }
