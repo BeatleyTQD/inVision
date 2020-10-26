@@ -30,6 +30,7 @@ namespace inVision
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IDreamRepository, DreamRepository>();
+            services.AddTransient<IWhyRepository, WhyRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
