@@ -16,7 +16,6 @@ namespace inVision.Models
         [Required]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(28, MinimumLength = 28)]
         public string FirebaseUserId { get; set; }
     }

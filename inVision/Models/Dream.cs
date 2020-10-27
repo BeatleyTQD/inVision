@@ -20,14 +20,7 @@ namespace inVision.Models
         [Required]
         public int UserProfileId { get; set; }
 
-        [Required]
         public UserProfile UserProfile { get; set; }
 
-        [Required]
-        public List<How> Hows { get; set; }
-
-        public List<CompletedHow> CompletedHows { get; set; }
-
-        public List<Why> Whys { get; set; }
     }
 }

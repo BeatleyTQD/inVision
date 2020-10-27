@@ -5,7 +5,7 @@ using inVision.Repositories;
 
 namespace inVision.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
