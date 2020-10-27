@@ -12,18 +12,20 @@ namespace inVision.Repositories
     {
         public HowRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<How> GetHowsForDream(int dreamId, int userProfileId)
+        public List<How> GetActiveHowsForDream(int dreamId, int userProfileId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT h.Id AS HowId, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
-	                                           d.Name, d.IsDeactivated, d.UserProfileId
-                                          FROM How h 
-                                          JOIN Dream d ON h.DreamId = d.Id
-                                          WHERE d.Id = @dreamId AND d.UserProfileId = @userProfileId";
+                    cmd.CommandText = @"SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
+				                                        d.Name, d.IsDeactivated, d.UserProfileId
+                                                   FROM How h
+                                                   JOIN Dream d ON h.DreamId = d.Id
+                                                   LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
+                                                   WHERE (ch.Id IS NULL OR (h.IsRepeatable = 1 AND ch.DateCompleted IS NOT NULL)) 
+                                                   AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId)";
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
 
@@ -34,7 +36,7 @@ namespace inVision.Repositories
                     {
                         hows.Add(new How()
                         {
-                            Id = DbUtils.GetInt(reader, "HowId"),
+                            Id = DbUtils.GetInt(reader, "Id"),
                             Description = DbUtils.GetString(reader, "Description"),
                             TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
                             IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),

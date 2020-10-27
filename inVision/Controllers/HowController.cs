@@ -33,7 +33,7 @@ namespace inVision.Controllers
             UserProfile user = GetCurrentUserProfile();
             int userId = user.Id;
 
-            return Ok(_howRepository.GetHowsForDream(id, userId));
+            return Ok(_howRepository.GetActiveHowsForDream(id, userId));
         }
 
         
