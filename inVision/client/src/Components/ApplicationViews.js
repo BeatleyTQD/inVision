@@ -3,9 +3,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
-import Home from "./Home";
 import DreamList from './Dream/DreamList';
 import DreamDetails from './Dream/DreamDetails';
+import HowForm from './How/HowForm';
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -34,6 +34,12 @@ export default function ApplicationViews() {
                 <Route path="/dreams/:id" exact>
                     {isLoggedIn ? <DreamDetails /> : <Redirect to="/login" />}
                 </Route>
+
+                {/*HOW NAVIGATION*/}
+                <Route path="/dreams/:id/how/add">
+                    {isLoggedIn ? <HowForm /> : <Redirect to="/login" />}
+                </Route>
+
             </Switch>
         </main>
     );

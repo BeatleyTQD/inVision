@@ -9,6 +9,7 @@ import CompletedHow from '.././CompletedHow/CompletedHow';
 
 export default function DreamDetails() {
     const [dream, setDream] = useState();
+    const history = useHistory();
     const { getDream } = useContext(DreamContext);
     const { hows, getActiveHows } = useContext(HowContext);
     const { completedHows, getCompletedHows } = useContext(CompletedHowContext);
@@ -26,6 +27,10 @@ export default function DreamDetails() {
         loadDream(id);
     }, [])
 
+    const Add = () => {
+        history.push(`${id}/how/add`)
+    }
+
     if (!dream) {
         return null;
     }
@@ -33,6 +38,8 @@ export default function DreamDetails() {
     return (
         <>
             <h1>{dream.name}</h1>
+            <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
+            <br />
             <Button color="link" >gimme a random how</Button>
             <h3>Active Hows</h3>
             <div>
@@ -47,7 +54,9 @@ export default function DreamDetails() {
                 ))}
             </div>
             <h4>random why will go here</h4>
-            <Button color="link" >remind me why</Button>
+            <Link to="/whys">
+                <Button color="link" >remind me why</Button>
+            </Link>
         </>
     )
 }
