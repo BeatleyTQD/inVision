@@ -24,7 +24,7 @@ namespace inVision.Repositories
                                                    FROM How h
                                                    JOIN Dream d ON h.DreamId = d.Id
                                                    LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
-                                                   WHERE (ch.Id IS NULL OR (h.IsRepeatable = 1 AND ch.DateCompleted IS NOT NULL)) 
+                                                   WHERE (ch.Id IS NULL OR h.IsRepeatable = 1)
                                                    AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId)";
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
