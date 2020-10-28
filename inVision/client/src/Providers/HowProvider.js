@@ -56,5 +56,22 @@ export const HowProvider = (props) => {
         );
     };
 
-    
+    const deleteHow = (id) => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+        })
+    };
+
+    return (
+        <HowContext.Provider value={{ hows, getActiveHows, getSingleHow, addHow, updateHow, deleteHow }}>
+            {props.children}
+        </HowContext.Provider>
+
+    )
 }
