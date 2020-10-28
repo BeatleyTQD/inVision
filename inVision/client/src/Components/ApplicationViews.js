@@ -4,6 +4,7 @@ import { UserProfileContext } from "../Providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
+import DreamList from './Dream/DreamList';
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -11,6 +12,7 @@ export default function ApplicationViews() {
     return (
         <main>
             <Switch>
+                {/*HOME NAVIGATION*/}
                 <Route path="/" exact>
                     {isLoggedIn ? <Home /> : <Redirect to="/login" />}
                 </Route>
@@ -21,6 +23,11 @@ export default function ApplicationViews() {
 
                 <Route path="/register">
                     <Register />
+                </Route>
+
+                {/*DREAM NAVIGATION*/}
+                <Route path="/dreams" exact>
+                    {isLoggedIn ? <DreamList /> : <Redirect to="/login" />}
                 </Route>
             </Switch>
         </main>

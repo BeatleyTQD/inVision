@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { HowContext } from "./HowProvider";
 import { UserProfileContext } from "./UserProfileProvider";
 
