@@ -70,8 +70,8 @@ export const WhyProvider = (props) => {
     };
 
     return (
-        <HowContext.Provider value={{ whys, getDreamWhys, getSingleWhy, addWhy, updateWhy, deleteWhy }}>
+        <WhyContext.Provider value={{ whys, getDreamWhys, getSingleWhy, addWhy, updateWhy, deleteWhy }}>
             {props.children}
-        </HowContext.Provider>
+        </WhyContext.Provider>
     )
 }

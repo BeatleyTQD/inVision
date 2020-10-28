@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
-import { DreamContext } from '../../Providers/DreamProvider';
 
 
 export default function Dream({ dream }) {
@@ -13,6 +12,7 @@ export default function Dream({ dream }) {
     return (
         <>
             <Button color="link" onClick={Details}>{dream.name}</Button>
+            <br />
         </>
     )
 }
