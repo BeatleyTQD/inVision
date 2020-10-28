@@ -12,6 +12,7 @@ export default function Dream({ dream }) {
     return (
         <>
             <Button color="link" onClick={Details}>{dream.name}</Button>
+            <br />
         </>
     )
 }

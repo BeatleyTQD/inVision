@@ -30,8 +30,6 @@ export default function DreamDetails() {
         return null;
     }
 
-
-
     return (
         <>
             <h1>{dream.name}</h1>
@@ -48,7 +46,7 @@ export default function DreamDetails() {
                     <CompletedHow key={completedHow.id} completedHow={completedHow} />
                 ))}
             </div>
-            <h4>insert random why</h4>
+            <h4>random why will go here</h4>
             <Button color="link" >remind me why</Button>
         </>
     )
