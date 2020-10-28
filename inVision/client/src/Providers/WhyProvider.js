@@ -8,7 +8,7 @@ export const WhyProvider = (props) => {
     const [whys, setWhys] = useState([]);
     const { getToken } = useContext(UserProfileContext);
 
-    const apiUrl = "api/why";
+    const apiUrl = "/api/why";
 
     const getDreamWhys = (id) => {
         return getToken().then((token) =>
