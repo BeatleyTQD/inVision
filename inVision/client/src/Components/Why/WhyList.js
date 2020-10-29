@@ -16,10 +16,16 @@ export default function WhyList() {
 
     const Add = () => {
         history.push(`/dreams/${id}/whys/add`)
+    };
+
+    const GoBack = () => {
+        history.push(`/dreams/${id}`)
     }
     return (
         <>
             <h2>member now?</h2>
+            <Button onClick={GoBack} color="info">i am done membering</Button>
+            <br />
             <Button onClick={Add}>Add Why</Button>
             <div>
                 {whys.map((why) => (

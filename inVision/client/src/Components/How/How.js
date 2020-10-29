@@ -1,14 +1,53 @@
-import React from 'react';
-import { Button } from 'reactstrap';
+import React, { useContext, useState } from 'react';
+import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
+import { useHistory } from "react-router-dom";
+import { HowContext } from '../../Providers/HowProvider';
+
 
 export default function How({ how }) {
+    const { deleteHow, getActiveHows } = useContext(HowContext);
+    const history = useHistory();
+    const [modal, setModal] = useState(false);
+    const [nestedModal, setNestedModal] = useState(false);
+    const [closeAll, setCloseAll] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const toggleNested = () => {
+        setNestedModal(!nestedModal);
+        setCloseAll(false);
+    }
+    const toggleAll = () => {
+        setNestedModal(!nestedModal);
+        setCloseAll(true);
+    }
+    const Delete = () => {
+        deleteHow(how.id)
+            .then(toggleAll)
+            .then(getActiveHows(how.dreamId));
+    };
+
     return (
         <>
             <div>
-                <Button color="link" >{how.description}</Button>
-                <br />
+                <Button color="link" onClick={toggle}>{how.description}</Button>
+                <Modal isOpen={modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
+                    <ModalFooter>
+                        <Button color="primary">Complete!</Button>{' '}
+                        <Button color="secondary">Edit</Button>{' '}
+                        <Button color="danger" onClick={toggleNested}>Delete</Button>
+                        <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
+                            <ModalHeader>Are you sure you want to delete?</ModalHeader>
+                            <ModalFooter>
+                                <Button color="danger" onClick={Delete}>Delete</Button>{' '}
+                                <Button color="secondary" onClick={toggleNested}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </ModalFooter>
+                </Modal>
                 {how.timeToComplete} Minutes
             </div>
+            <br />
         </>
     )
 }
