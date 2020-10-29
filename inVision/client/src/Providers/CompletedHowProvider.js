@@ -20,8 +20,20 @@ export const CompletedHowProvider = (props) => {
                 .then(setCompletedHows));
     }
 
+    const addCompletedHow = (completedHow) => {
+        return getToken().then((token) =>
+            fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(completedHow)
+            }).then(resp => resp.json()));
+    }
+
     return (
-        <CompletedHowContext.Provider value={{ completedHows, getCompletedHows }}>
+        <CompletedHowContext.Provider value={{ completedHows, getCompletedHows, addCompletedHow }}>
             {props.children}
         </CompletedHowContext.Provider>
     )

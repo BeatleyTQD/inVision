@@ -6,5 +6,7 @@ namespace inVision.Repositories
     public interface ICompletedHowRepository
     {
         List<CompletedHow> GetCompletedHows(int dreamId);
+
+        public void AddCompletedHow(CompletedHow completedHow);
     }
 }
