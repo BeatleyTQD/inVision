@@ -31,6 +31,10 @@ export default function DreamDetails() {
         history.push(`${id}/how/add`)
     }
 
+    const Whys = () => {
+        history.push(`${id}/whys`)
+    }
+
     if (!dream) {
         return null;
     }
@@ -54,9 +58,7 @@ export default function DreamDetails() {
                 ))}
             </div>
             <h4>random why will go here</h4>
-            <Link to="/whys">
-                <Button color="link" >remind me why</Button>
-            </Link>
+            <Button color="link" onClick={Whys}>remind me why</Button>
         </>
     )
 }
