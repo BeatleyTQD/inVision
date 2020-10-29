@@ -41,18 +41,19 @@ namespace inVision.Controllers
             UserProfile user = GetCurrentUserProfile();
             int userId = user.Id;
 
-            var why = _whyRepository.GetById(id);
-            if (why == null)
-            {
-                return NotFound();
-            }
+            return Ok(_whyRepository.GetById(id, userId));
 
-            if (why.Dream.UserProfileId != userId)
-            {
-                return Unauthorized();
-            }
+           
+        }
 
-            return Ok(why);
+        [HttpGet]
+        [Route("GetRandom/{id}")]
+        public IActionResult GetRandom(int id)
+        {
+            UserProfile user = GetCurrentUserProfile();
+            int userId = user.Id;
+
+            return Ok(_whyRepository.GetRandomWhy(id, userId));
         }
 
         [HttpPost]

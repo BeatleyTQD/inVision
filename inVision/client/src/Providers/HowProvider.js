@@ -31,6 +31,7 @@ export const HowProvider = (props) => {
 
     };
 
+
     const addHow = (how) => {
         return getToken().then((token) =>
             fetch(apiUrl, {

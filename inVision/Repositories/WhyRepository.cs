@@ -51,7 +51,7 @@ namespace inVision.Repositories
                 }
             }
         }
-        public Why GetById(int id)
+        public Why GetById(int id, int userProfileId)
         {
             using (var conn = Connection)
             {
@@ -61,8 +61,53 @@ namespace inVision.Repositories
                     cmd.CommandText = @"SELECT w.Id AS WhyId, w.Description, w.DreamId, d.Name, d.IsDeactivated, d.UserProfileId
                                          FROM Why w
                                          JOIN Dream d ON w.DreamId = d.Id
-                                        WHERE w.Id = @id";
+                                        WHERE w.Id = @id AND d.UserProfileId =  @userProfileId";
                     cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Why why = new Why()
+                        {
+                            Id = DbUtils.GetInt(reader, "WhyId"),
+                            Description = DbUtils.GetString(reader, "Description"),
+                            DreamId = DbUtils.GetInt(reader, "DreamId"),
+                            Dream = new Dream()
+                            {
+                                Id = DbUtils.GetInt(reader, "DreamId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                IsDeactivated = DbUtils.GetInt(reader, "IsDeactivated"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            }
+                        };
+                        reader.Close();
+                        return why;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public Why GetRandomWhy(int dreamId, int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT TOP 1 w.Id AS WhyId, w.Description, w.DreamId, d.Name, d.IsDeactivated, d.UserProfileId
+                                          FROM Why w
+                                          JOIN Dream d ON w.DreamId = d.Id
+                                         WHERE d.Id = @dreamId AND d.UserProfileId =  @userProfileId
+                                         ORDER BY NEWID();";
+                    cmd.Parameters.AddWithValue("@dreamId", dreamId);
+                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
 
                     var reader = cmd.ExecuteReader();
 
