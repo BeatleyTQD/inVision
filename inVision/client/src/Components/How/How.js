@@ -20,6 +20,10 @@ export default function How({ how }) {
         setNestedModal(!nestedModal);
         setCloseAll(true);
     }
+
+    const Edit = () => {
+        history.push(`/how/edit/${how.id}`)
+    }
     const Delete = () => {
         deleteHow(how.id)
             .then(toggleAll)
@@ -34,7 +38,7 @@ export default function How({ how }) {
                     <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
                     <ModalFooter>
                         <Button color="primary">Complete!</Button>{' '}
-                        <Button color="secondary">Edit</Button>{' '}
+                        <Button color="secondary" onClick={Edit}>Edit</Button>{' '}
                         <Button color="danger" onClick={toggleNested}>Delete</Button>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                             <ModalHeader>Are you sure you want to delete?</ModalHeader>
