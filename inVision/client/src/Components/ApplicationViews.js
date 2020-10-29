@@ -4,6 +4,7 @@ import { UserProfileContext } from "../Providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import DreamList from './Dream/DreamList';
+import DreamReminder from './Dream/DreamReminder';
 import DreamDetails from './Dream/DreamDetails';
 import HowForm from './How/HowForm';
 import WhyList from './Why/WhyList';
@@ -34,6 +35,10 @@ export default function ApplicationViews() {
 
                 <Route path="/dreams/:id" exact>
                     {isLoggedIn ? <DreamDetails /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/dreams/:id/reminder" exact>
+                    {isLoggedIn ? <DreamReminder /> : <Redirect to="/login" />}
                 </Route>
 
                 {/*HOW NAVIGATION*/}

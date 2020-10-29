@@ -32,6 +32,16 @@ export const WhyProvider = (props) => {
 
     };
 
+    const getRandomWhy = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/GetRandom/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json()));
+    }
+
     const addWhy = (why) => {
         return getToken().then((token) =>
             fetch(apiUrl, {
@@ -70,7 +80,7 @@ export const WhyProvider = (props) => {
     };
 
     return (
-        <WhyContext.Provider value={{ whys, getDreamWhys, getSingleWhy, addWhy, updateWhy, deleteWhy }}>
+        <WhyContext.Provider value={{ whys, getDreamWhys, getSingleWhy, getRandomWhy, addWhy, updateWhy, deleteWhy }}>
             {props.children}
         </WhyContext.Provider>
     )

@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { DreamContext } from '../../Providers/DreamProvider';
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
+import { WhyContext } from '../../Providers/WhyProvider';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button } from "reactstrap";
 import How from '.././How/How';
@@ -9,10 +10,12 @@ import CompletedHow from '.././CompletedHow/CompletedHow';
 
 export default function DreamDetails() {
     const [dream, setDream] = useState();
+    const [why, setWhy] = useState();
     const history = useHistory();
     const { getDream } = useContext(DreamContext);
     const { hows, getActiveHows } = useContext(HowContext);
     const { completedHows, getCompletedHows } = useContext(CompletedHowContext);
+    const { getRandomWhy } = useContext(WhyContext);
     const { id } = useParams();
 
 
@@ -21,6 +24,8 @@ export default function DreamDetails() {
             .then(setDream);
         getActiveHows(id);
         getCompletedHows(id);
+        getRandomWhy(id)
+            .then(setWhy);
     }
 
     useEffect(() => {
@@ -35,7 +40,7 @@ export default function DreamDetails() {
         history.push(`${id}/whys`)
     }
 
-    if (!dream) {
+    if (!dream || !why) {
         return null;
     }
 
@@ -57,7 +62,7 @@ export default function DreamDetails() {
                     <CompletedHow key={completedHow.id} completedHow={completedHow} />
                 ))}
             </div>
-            <h4>random why will go here</h4>
+            <h4>{why.description}</h4>
             <Button color="link" onClick={Whys}>remind me why</Button>
         </>
     )

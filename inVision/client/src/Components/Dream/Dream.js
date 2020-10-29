@@ -7,7 +7,7 @@ export default function Dream({ dream }) {
     const history = useHistory();
 
     const Details = () => {
-        history.push(`dreams/${dream.id}`)
+        history.push(`dreams/${dream.id}/reminder`)
     }
     return (
         <>
