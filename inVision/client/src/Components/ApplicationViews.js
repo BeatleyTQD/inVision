@@ -28,9 +28,9 @@ export default function ApplicationViews() {
                 </Route>
 
                 {/*DREAM NAVIGATION*/}
-                <Route path="/dreams" exact>
+                {/* <Route path="/dreams" exact>
                     {isLoggedIn ? <DreamList /> : <Redirect to="/login" />}
-                </Route>
+                </Route> */}
 
                 <Route path="/dreams/:id" exact>
                     {isLoggedIn ? <DreamDetails /> : <Redirect to="/login" />}
