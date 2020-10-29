@@ -7,6 +7,7 @@ import DreamList from './Dream/DreamList';
 import DreamReminder from './Dream/DreamReminder';
 import DreamDetails from './Dream/DreamDetails';
 import HowForm from './How/HowForm';
+import HowEditForm from './How/HowEditForm';
 import WhyList from './Why/WhyList';
 import WhyForm from './Why/WhyForm';
 import WhyEditForm from './Why/WhyEditForm';
@@ -43,6 +44,10 @@ export default function ApplicationViews() {
                 {/*HOW NAVIGATION*/}
                 <Route path="/dreams/:id/how/add">
                     {isLoggedIn ? <HowForm /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/how/edit/:id">
+                    {isLoggedIn ? <HowEditForm /> : <Redirect to="/login" />}
                 </Route>
 
                 {/*WHY NAVIGATION*/}

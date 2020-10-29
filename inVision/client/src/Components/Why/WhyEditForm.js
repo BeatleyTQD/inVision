@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-export default function WhyForm() {
+export default function WhyEditForm() {
     const { getSingleWhy, updateWhy } = useContext(WhyContext);
     const [why, setWhy] = useState({ description: "" });
     const { id } = useParams();
