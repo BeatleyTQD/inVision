@@ -28,6 +28,10 @@ export default function HowForm() {
             .then(() => history.push(`/dreams/${id}`))
     }
 
+    const Cancel = () => {
+        history.push(`/dreams/${id}`);
+    };
+
     return (
         <>
             <h2>new how</h2>
@@ -50,6 +54,7 @@ export default function HowForm() {
                     </FormGroup>
                     <FormGroup>
                         <Button onClick={saveHow}>Save How</Button>
+                        <Button onClick={Cancel}>Cancel</Button>
                     </FormGroup>
                 </fieldset>
             </Form>

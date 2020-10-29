@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
+import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 
 
 export default function How({ how }) {
     const { deleteHow, getActiveHows } = useContext(HowContext);
+    const { addCompletedHow } = useContext(CompletedHowContext);
     const history = useHistory();
     const [modal, setModal] = useState(false);
     const [nestedModal, setNestedModal] = useState(false);
@@ -15,20 +17,32 @@ export default function How({ how }) {
     const toggleNested = () => {
         setNestedModal(!nestedModal);
         setCloseAll(false);
-    }
+    };
+
     const toggleAll = () => {
         setNestedModal(!nestedModal);
         setCloseAll(true);
-    }
+    };
 
     const Edit = () => {
         history.push(`/how/edit/${how.id}`)
-    }
+    };
+
     const Delete = () => {
         deleteHow(how.id)
             .then(toggleAll)
             .then(getActiveHows(how.dreamId));
     };
+
+    const Complete = () => {
+        const completedHow = {
+            dateCompleted: new Date(),
+            howId: how.id
+        };
+        addCompletedHow(completedHow)
+            .then(toggle)
+            .then(getActiveHows(how.dreamId));
+    }
 
     return (
         <>
@@ -37,7 +51,7 @@ export default function How({ how }) {
                 <Modal isOpen={modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
                     <ModalFooter>
-                        <Button color="primary">Complete!</Button>{' '}
+                        <Button color="primary" onClick={Complete}>Complete!</Button>{' '}
                         <Button color="secondary" onClick={Edit}>Edit</Button>{' '}
                         <Button color="danger" onClick={toggleNested}>Delete</Button>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>

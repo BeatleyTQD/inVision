@@ -50,5 +50,24 @@ namespace inVision.Repositories
                 }
             }
         }
+
+        public void AddCompletedHow(CompletedHow completedHow)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO CompletedHow (DateCompleted, HowId)
+                                             OUTPUT INSERTED.ID
+                                             VALUES (@DateCompleted, @HowId)";
+
+                    cmd.Parameters.AddWithValue("@DateCompleted", completedHow.DateCompleted);
+                    cmd.Parameters.AddWithValue("@HowId", completedHow.HowId);
+
+                    completedHow.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }

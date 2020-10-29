@@ -64,6 +64,7 @@ export default function HowEditForm() {
                     </FormGroup>
                     <FormGroup>
                         <Button onClick={Update}>Save How</Button>
+                        <Button onClick={Cancel}>Cancel</Button>
                     </FormGroup>
                 </fieldset>
             </Form>

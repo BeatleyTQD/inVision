@@ -22,5 +22,12 @@ namespace inVision.Controllers
         {
             return Ok(_completedHowRepository.GetCompletedHows(id));
         }
+
+        [HttpPost]
+        public IActionResult Post(CompletedHow completedHow)
+        {
+            _completedHowRepository.AddCompletedHow(completedHow);
+            return CreatedAtAction("Get", new { id = completedHow.Id }, completedHow);
+        }
     }
 }
