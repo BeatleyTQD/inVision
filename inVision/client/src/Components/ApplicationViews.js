@@ -8,6 +8,7 @@ import DreamReminder from './Dream/DreamReminder';
 import DreamDetails from './Dream/DreamDetails';
 import HowForm from './How/HowForm';
 import WhyList from './Why/WhyList';
+import WhyForm from './Why/WhyForm';
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -29,9 +30,6 @@ export default function ApplicationViews() {
                 </Route>
 
                 {/*DREAM NAVIGATION*/}
-                {/* <Route path="/dreams" exact>
-                    {isLoggedIn ? <DreamList /> : <Redirect to="/login" />}
-                </Route> */}
 
                 <Route path="/dreams/:id" exact>
                     {isLoggedIn ? <DreamDetails /> : <Redirect to="/login" />}
@@ -47,10 +45,13 @@ export default function ApplicationViews() {
                 </Route>
 
                 {/*WHY NAVIGATION*/}
-                <Route path="/dreams/:id/whys">
+                <Route path="/dreams/:id/whys" exact>
                     {isLoggedIn ? <WhyList /> : <Redirect to="/login" />}
                 </Route>
 
+                <Route path="/dreams/:id/whys/add">
+                    {isLoggedIn ? <WhyForm /> : <Redirect to="/login" />}
+                </Route>
             </Switch>
         </main>
     );
