@@ -7,7 +7,7 @@ import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 
 export default function How({ how }) {
     const { deleteHow, getActiveHows } = useContext(HowContext);
-    const { addCompletedHow } = useContext(CompletedHowContext);
+    const { addCompletedHow, getCompletedHows } = useContext(CompletedHowContext);
     const history = useHistory();
     const [modal, setModal] = useState(false);
     const [nestedModal, setNestedModal] = useState(false);
@@ -41,7 +41,7 @@ export default function How({ how }) {
         };
         addCompletedHow(completedHow)
             .then(toggle)
-            .then(getActiveHows(how.dreamId));
+            .then(getCompletedHows(how.dreamId));
     }
 
     return (
