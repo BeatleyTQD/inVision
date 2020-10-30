@@ -42,6 +42,7 @@ CREATE TABLE [How]
     [Description] NVARCHAR(255) NOT NULL,
     [TimeToComplete] INTEGER NOT NULL,
     [IsRepeatable] INTEGER NOT NULL,
+    [IsDeleted] INTEGER NOT NULL,
     [DreamId] INTEGER NOT NULL,
 
     CONSTRAINT FK_How_Dream FOREIGN KEY (DreamId) REFERENCES Dream(Id)

@@ -22,16 +22,16 @@ SET IDENTITY_INSERT [Dream] OFF
 
 SET IDENTITY_INSERT [How] ON
 INSERT INTO [How]
-    ([Id], [Description], [TimeToComplete], [IsRepeatable], [DreamId])
+    ([Id], [Description], [TimeToComplete], [IsRepeatable], [IsDeleted], [DreamId])
 VALUES
-    (1, 'Record Video', 45, 1, 1),
-    (2, 'Design Logo', 60, 0, 1),
-    (3, 'Comission intro song', 30, 0, 1),
-    (4, 'Pick training plan', 30, 0, 2),
-    (5, 'Buy new shoes', 60, 0, 2),
-    (6, 'Meal prep', 90, 1, 2),
-    (7, 'Eat a lot', 60, 1, 3),
-    (8, 'Learn to read', 90, 0, 4);
+    (1, 'Record Video', 45, 1, 0, 1),
+    (2, 'Design Logo', 60, 0, 0, 1),
+    (3, 'Comission intro song', 30, 0, 0, 1),
+    (4, 'Pick training plan', 30, 0, 0, 2),
+    (5, 'Buy new shoes', 60, 0, 0, 2),
+    (6, 'Meal prep', 90, 1, 0, 2),
+    (7, 'Eat a lot', 60, 1, 0, 3),
+    (8, 'Learn to read', 90, 0, 0, 4);
 SET IDENTITY_INSERT [How] OFF
 
 SET IDENTITY_INSERT [CompletedHow] ON

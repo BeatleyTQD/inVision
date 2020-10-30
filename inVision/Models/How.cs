@@ -18,6 +18,8 @@ namespace inVision.Models
 
         [Required]
         public int IsRepeatable { get; set; }
+        [Required]
+        public int IsDeleted { get; set; }
 
         [Required]
         public int DreamId { get; set; }

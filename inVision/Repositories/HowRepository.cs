@@ -25,7 +25,7 @@ namespace inVision.Repositories
                                                    JOIN Dream d ON h.DreamId = d.Id
                                                    LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
                                                    WHERE (ch.Id IS NULL OR h.IsRepeatable = 1)
-                                                   AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId)";
+                                                   AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId AND IsDeleted = 0)";
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
 
@@ -67,7 +67,7 @@ namespace inVision.Repositories
 	                                           d.Name, d.IsDeactivated, d.UserProfileId
                                           FROM How h 
                                           JOIN Dream d ON h.DreamId = d.Id
-                                        WHERE h.Id = @id";
+                                        WHERE h.Id = @id AND IsDeleted = 0";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     var reader = cmd.ExecuteReader();
@@ -108,9 +108,9 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO How (Description, TimeToComplete, IsRepeatable, DreamId)
+                    cmd.CommandText = @"INSERT INTO How (Description, TimeToComplete, IsRepeatable, IsDeleted, DreamId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Description, @TimeToComplete, @IsRepeatable, @DreamId)";
+                                        VALUES (@Description, @TimeToComplete, @IsRepeatable, 0, @DreamId)";
                     cmd.Parameters.AddWithValue("@Description", how.Description);
                     cmd.Parameters.AddWithValue("@TimeToComplete", how.TimeToComplete);
                     cmd.Parameters.AddWithValue("@IsRepeatable", how.IsRepeatable);
@@ -129,7 +129,9 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM How WHERE Id = @Id";
+                    cmd.CommandText = @"UPDATE How
+                                           SET IsDeleted = 1
+                                         WHERE Id = @Id";
                     cmd.Parameters.AddWithValue("@Id", id);
 
                     cmd.ExecuteNonQuery();
