@@ -108,16 +108,17 @@ namespace inVision.Repositories
                 conn.Open();
                 using(var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, DreamId, Name, UserProfileId 
-                                                FROM (
+                    cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, DreamId, Name, IsDeactivated, UserProfileId
+                                                FROM 
+		                                        (
 				                                        SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
-								                                        d.Name, d.UserProfileId
+								                                        d.Name, d.IsDeactivated, d.UserProfileId
 				                                          FROM How h
 			                                              JOIN Dream d ON h.DreamId = d.Id
 	                                                 LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
 				                                         WHERE (ch.Id IS NULL OR h.IsRepeatable = 1) 
-				                                           AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId)
-                                                                                                       )
+				                                           AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId AND h.IsDeleted = 0)
+				                                           )
                                         AS HowOptions
                                         WHERE TimeToComplete <= @timeAvailable
                                         ORDER BY NEWID();";
@@ -132,7 +133,7 @@ namespace inVision.Repositories
                     {
                         How how = new How()
                         {
-                            Id = DbUtils.GetInt(reader, "HowId"),
+                            Id = DbUtils.GetInt(reader, "Id"),
                             Description = DbUtils.GetString(reader, "Description"),
                             TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
                             IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),
