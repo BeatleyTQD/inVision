@@ -6,6 +6,7 @@ import Register from "./Register";
 import DreamList from './Dream/DreamList';
 import DreamReminder from './Dream/DreamReminder';
 import DreamDetails from './Dream/DreamDetails';
+import DreamForm from './Dream/DreamForm';
 import HowForm from './How/HowForm';
 import HowEditForm from './How/HowEditForm';
 import WhyList from './Why/WhyList';
@@ -39,6 +40,10 @@ export default function ApplicationViews() {
 
                 <Route path="/dreams/:id/reminder" exact>
                     {isLoggedIn ? <DreamReminder /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/addDream" exact>
+                    {isLoggedIn ? <DreamForm /> : <Redirect to="/login" />}
                 </Route>
 
                 {/*HOW NAVIGATION*/}
