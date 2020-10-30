@@ -31,7 +31,8 @@ VALUES
     (5, 'Buy new shoes', 60, 0, 0, 2),
     (6, 'Meal prep', 90, 1, 0, 2),
     (7, 'Eat a lot', 60, 1, 0, 3),
-    (8, 'Learn to read', 90, 0, 0, 4);
+    (8, 'Learn to read', 90, 0, 0, 4),
+    (9, 'Backup old videos', 30, 1, 0, 1);
 SET IDENTITY_INSERT [How] OFF
 
 SET IDENTITY_INSERT [CompletedHow] ON

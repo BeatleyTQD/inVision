@@ -64,11 +64,18 @@ namespace inVision.Controllers
             UserProfile user = GetCurrentUserProfile();
             int userId = user.Id;
 
-            return Ok(_howRepository.GetRandomHow(id, userId, timeAvailable));
+            var randomHow = _howRepository.GetRandomHow(id, userId, timeAvailable);
+            if (randomHow == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(randomHow);
+            
         }
 
         
-
+        
         // POST api/<HowController>
         [HttpPost]
         public IActionResult Post(How how)
