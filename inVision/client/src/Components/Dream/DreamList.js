@@ -22,7 +22,7 @@ export default function DreamList() {
     return (
         <>
             <h2>your wildest dreams</h2>
-            <Button color="link" onClick={New}>new dream</Button>
+            <Button color="primary" onClick={New}>new dream</Button>
             <div>
                 {dreams.map((dream) => (
                     <Dream key={dream.id} dream={dream} />

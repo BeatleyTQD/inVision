@@ -25,10 +25,12 @@ export default function HowForm() {
     const saveHow = () => {
         how.dreamId = parseInt(id);
         addHow(how)
-            .then(() => history.push(`/dreams/${id}`))
+            .then(document.getElementById("description").value = "",
+                document.getElementById("timeToComplete").value = "",
+                document.getElementById("isRepeatable").value = 0)
     }
 
-    const Cancel = () => {
+    const done = () => {
         history.push(`/dreams/${id}`);
     };
 
@@ -53,8 +55,8 @@ export default function HowForm() {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveHow}>Save How</Button>
-                        <Button onClick={Cancel}>Cancel</Button>
+                        <Button onClick={saveHow} color="info">Add More</Button>
+                        <Button onClick={done}>Done</Button>
                     </FormGroup>
                 </fieldset>
             </Form>

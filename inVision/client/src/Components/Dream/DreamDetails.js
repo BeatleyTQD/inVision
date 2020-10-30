@@ -51,7 +51,7 @@ export default function DreamDetails() {
     return (
         <>
             <h1>{dream.name}</h1>
-            <Button color="primary" onClick={allDreams}>all dreams</Button>
+            <Button color="secondary" onClick={allDreams}>all dreams</Button> <br />
             <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
             <br />
             <Button color="link" >gimme a random how</Button>

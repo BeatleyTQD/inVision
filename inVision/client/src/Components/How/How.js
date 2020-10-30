@@ -41,6 +41,7 @@ export default function How({ how }) {
         };
         addCompletedHow(completedHow)
             .then(toggle)
+            .then(getActiveHows(how.dreamId))
             .then(getCompletedHows(how.dreamId));
     }
 

@@ -35,7 +35,7 @@ export default function WhyForm() {
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveWhy}>Add More</Button>
+                        <Button onClick={saveWhy} color="info">Add More</Button>
                         <Button onClick={done}>Done</Button>
                     </FormGroup>
                 </fieldset>
