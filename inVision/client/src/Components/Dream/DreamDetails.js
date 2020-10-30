@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import { UserProfileContext } from '../../Providers/UserProfileProvider';
 import { DreamContext } from '../../Providers/DreamProvider';
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
@@ -13,7 +12,6 @@ export default function DreamDetails() {
     const [dream, setDream] = useState();
     const [why, setWhy] = useState();
     const history = useHistory();
-    const { logout } = useContext(UserProfileContext);
     const { getDream } = useContext(DreamContext);
     const { hows, getActiveHows } = useContext(HowContext);
     const { completedHows, getCompletedHows } = useContext(CompletedHowContext);
@@ -53,7 +51,7 @@ export default function DreamDetails() {
     return (
         <>
             <h1>{dream.name}</h1>
-            <Button color="primary" onClick={allDreams}>all dreams</Button>
+            <Button color="secondary" onClick={allDreams}>all dreams</Button> <br />
             <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
             <br />
             <Button color="link" >gimme a random how</Button>

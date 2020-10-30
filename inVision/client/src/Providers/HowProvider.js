@@ -31,6 +31,15 @@ export const HowProvider = (props) => {
 
     };
 
+    const getRandomHow = (dreamId, timeAvaible) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/GetRandom/${id}/${timeAvaible}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json()));
+    }
 
     const addHow = (how) => {
         return getToken().then((token) =>
@@ -70,7 +79,7 @@ export const HowProvider = (props) => {
     };
 
     return (
-        <HowContext.Provider value={{ hows, getActiveHows, getSingleHow, addHow, updateHow, deleteHow }}>
+        <HowContext.Provider value={{ hows, getActiveHows, getSingleHow, getRandomHow, addHow, updateHow, deleteHow }}>
             {props.children}
         </HowContext.Provider>
 
