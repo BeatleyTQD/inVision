@@ -33,7 +33,7 @@ export const HowProvider = (props) => {
 
     const getRandomHow = (dreamId, timeAvaible) => {
         return getToken().then((token) =>
-            fetch(`${apiUrl}/GetRandom/${id}/${timeAvaible}`, {
+            fetch(`${apiUrl}/GetRandom/${dreamId}/${timeAvaible}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
