@@ -101,6 +101,62 @@ namespace inVision.Repositories
             }
         }
 
+        public How GetRandomHow(int dreamId, int userProfileId, int timeAvailable)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using(var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, DreamId, Name, UserProfileId 
+                                                FROM (
+				                                        SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
+								                                        d.Name, d.UserProfileId
+				                                          FROM How h
+			                                              JOIN Dream d ON h.DreamId = d.Id
+	                                                 LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
+				                                         WHERE (ch.Id IS NULL OR h.IsRepeatable = 1) 
+				                                           AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId)
+                                                                                                       )
+                                        AS HowOptions
+                                        WHERE TimeToComplete <= @timeAvailable
+                                        ORDER BY NEWID();";
+
+                    cmd.Parameters.AddWithValue("@dreamId", dreamId);
+                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
+                    cmd.Parameters.AddWithValue("@timeAvailable", timeAvailable);
+
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        How how = new How()
+                        {
+                            Id = DbUtils.GetInt(reader, "HowId"),
+                            Description = DbUtils.GetString(reader, "Description"),
+                            TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
+                            IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),
+                            DreamId = DbUtils.GetInt(reader, "DreamId"),
+                            Dream = new Dream()
+                            {
+                                Id = DbUtils.GetInt(reader, "DreamId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                IsDeactivated = DbUtils.GetInt(reader, "IsDeactivated"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            }
+                        };
+                        reader.Close();
+                        return how;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+
         public void Add(How how)
         {
             using (var conn = Connection)

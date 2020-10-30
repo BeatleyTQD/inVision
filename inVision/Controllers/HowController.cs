@@ -57,6 +57,16 @@ namespace inVision.Controllers
 
             return Ok(how);
         }
+
+        [HttpGet("GetRandom/{id}/{timeAvailable}")]
+        public IActionResult GetRandom(int id, int timeAvailable)
+        {
+            UserProfile user = GetCurrentUserProfile();
+            int userId = user.Id;
+
+            return Ok(_howRepository.GetRandomHow(id, userId, timeAvailable));
+        }
+
         
 
         // POST api/<HowController>
