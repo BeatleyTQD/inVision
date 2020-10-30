@@ -18,7 +18,11 @@ export default function WhyForm() {
     const saveWhy = () => {
         why.dreamId = parseInt(id);
         addWhy(why)
-            .then(() => history.push(`/dreams/${id}/whys`))
+            .then(document.getElementById("description").value = "");
+    }
+
+    const done = () => {
+        history.push(`/dreams/${id}/whys`)
     }
 
     return (
@@ -31,7 +35,8 @@ export default function WhyForm() {
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveWhy}>Save Why</Button>
+                        <Button onClick={saveWhy}>Add More</Button>
+                        <Button onClick={done}>Done</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
