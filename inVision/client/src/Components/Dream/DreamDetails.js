@@ -40,6 +40,10 @@ export default function DreamDetails() {
         history.push(`${id}/whys`)
     }
 
+    const allDreams = () => {
+        history.push(`/`)
+    }
+
     if (!dream || !why) {
         return null;
     }
@@ -47,6 +51,7 @@ export default function DreamDetails() {
     return (
         <>
             <h1>{dream.name}</h1>
+            <Button color="primary" onClick={allDreams}>all dreams</Button>
             <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
             <br />
             <Button color="link" >gimme a random how</Button>

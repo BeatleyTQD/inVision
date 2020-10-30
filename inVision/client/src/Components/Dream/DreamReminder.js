@@ -21,6 +21,7 @@ export default function DreamReminder() {
     if (!why) {
         return null;
     }
+
     return (
         <>
             <h1>I set out to do this because...</h1>
