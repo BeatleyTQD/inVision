@@ -31,9 +31,8 @@ namespace inVision.Controllers
         public IActionResult Get(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
-            return Ok(_howRepository.GetActiveHowsForDream(id, userId));
+            return Ok(_howRepository.GetActiveHowsForDream(id, user.Id));
         }
 
         
@@ -42,7 +41,6 @@ namespace inVision.Controllers
         public IActionResult GetById(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
             var how = _howRepository.GetById(id);
             if (how == null)
@@ -50,7 +48,7 @@ namespace inVision.Controllers
                 return NotFound();
             }
 
-            if (how.Dream.UserProfileId != userId)
+            if (how.Dream.UserProfileId != user.Id)
             {
                 return Unauthorized();
             }
@@ -62,12 +60,16 @@ namespace inVision.Controllers
         public IActionResult GetRandom(int id, int timeAvailable)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
-            var randomHow = _howRepository.GetRandomHow(id, userId, timeAvailable);
+            var randomHow = _howRepository.GetRandomHow(id, user.Id, timeAvailable);
             if (randomHow == null)
             {
                 return NotFound();
+            }
+
+            if (randomHow.Dream.UserProfileId != user.Id)
+            {
+                return Unauthorized();
             }
 
             return Ok(randomHow);
@@ -89,14 +91,18 @@ namespace inVision.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _howRepository.Delete(id);
+            UserProfile user = GetCurrentUserProfile();
+
+            _howRepository.Delete(id, user.Id);
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public void Put(How how)
+        public IActionResult Put(How how)
         {
-            _howRepository.Update(how);
+            UserProfile user = GetCurrentUserProfile();
+            _howRepository.Update(how, user.Id);
+            return NoContent();
         }
     }
 }

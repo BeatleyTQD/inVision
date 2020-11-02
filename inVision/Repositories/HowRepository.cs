@@ -179,7 +179,7 @@ namespace inVision.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int HowId, int userProfileId)
         {
             using (var conn = Connection)
             {
@@ -187,31 +187,38 @@ namespace inVision.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE How
-                                           SET IsDeleted = 1
-                                         WHERE Id = @Id";
-                    cmd.Parameters.AddWithValue("@Id", id);
+                                           SET How.IsDeleted = 1
+                                          FROM How JOIN Dream ON How.DreamId = Dream.Id
+                                          JOIN UserProfile ON Dream.UserProfileId = UserProfile.Id
+                                         WHERE How.Id = @HowId AND UserProfile.Id = @UserProfileId";
+                    cmd.Parameters.AddWithValue("@HowId", HowId);
+                    cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
+
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void Update(How how)
+        public void Update(How how, int userProfileId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"UPDATE How 
-                                           SET Description = @Description,
-	                                           TimeToComplete = @TimeToComplete,
-	                                           IsRepeatable = @IsRepeatable
-                                         WHERE Id = @Id";
+                    cmd.CommandText = @"UPDATE How
+                                           SET How.Description = @Description,
+                                               How.TimeToComplete = @TimeToComplete,
+                                               How.IsRepeatable = @IsRepeatable
+                                          FROM How JOIN Dream ON How.DreamId = Dream.Id
+                                          JOIN UserProfile ON Dream.UserProfileId = UserProfile.Id
+                                         WHERE How.Id = @HowId AND UserProfile.Id = @UserProfileId";
                     cmd.Parameters.AddWithValue("@Description", how.Description);
                     cmd.Parameters.AddWithValue("@TimeToComplete", how.TimeToComplete);
                     cmd.Parameters.AddWithValue("@IsRepeatable", how.IsRepeatable);
-                    cmd.Parameters.AddWithValue("@Id", how.Id);
+                    cmd.Parameters.AddWithValue("@HowId", how.Id);
+                    cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
 
                     cmd.ExecuteNonQuery();
                 }

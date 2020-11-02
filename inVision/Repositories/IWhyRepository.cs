@@ -9,8 +9,8 @@ namespace inVision.Repositories
         Why GetById(int id, int userProfileId);
         Why GetRandomWhy(int id, int userProfileId);
         public void Add(Why why);
-        public void Delete(int id);
-        public void Update(Why why);
+        public void Delete(int id, int userProfileId);
+        public void Update(Why why, int userProfileId);
 
     }
 }
