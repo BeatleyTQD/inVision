@@ -57,7 +57,20 @@ namespace inVision.Controllers
         {
             UserProfile user = GetCurrentUserProfile();
 
-            return Ok(_whyRepository.GetRandomWhy(id, user.Id));
+            var why = _whyRepository.GetRandomWhy(id, user.Id);
+
+
+            if (why == null)
+            {
+                return Unauthorized();
+            }
+
+            if (why.Dream.UserProfileId != user.Id)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(why);
         }
 
         [HttpPost]
@@ -70,14 +83,19 @@ namespace inVision.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _whyRepository.Delete(id);
+            UserProfile user = GetCurrentUserProfile();
+
+            _whyRepository.Delete(id, user.Id);
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public void Put(Why why)
+        public IActionResult Put(Why why)
         {
-            _whyRepository.Update(why);
+            UserProfile user = GetCurrentUserProfile();
+
+            _whyRepository.Update(why, user.Id);
+            return NoContent();
         }
     }
 }

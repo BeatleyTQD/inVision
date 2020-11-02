@@ -156,33 +156,42 @@ namespace inVision.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int whyId, int userProfileId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Why WHERE Id = @Id";
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.CommandText = @"DELETE Why
+                                          FROM Why
+                                          JOIN Dream ON Why.DreamId = Dream.Id
+                                          JOIN UserProfile ON Dream.UserProfileId = UserProfile.Id
+                                          WHERE Why.Id = @whyId AND UserProfileId = @userProfileId";
+                    cmd.Parameters.AddWithValue("@whyId", whyId);
+                    cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void Update(Why why)
+        public void Update(Why why, int userProfileId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"UPDATE Why 
-                                           SET Description = @description
-                                         WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@description", why.Description);
-                    cmd.Parameters.AddWithValue("@id", why.Id);
+                    cmd.CommandText = @"UPDATE Why
+                                           SET Why.Description = @Description
+                                          FROM Why JOIN Dream ON Why.DreamId = Dream.Id
+                                          JOIN UserProfile ON Dream.UserProfileId = UserProfile.Id
+                                          WHERE Why.Id = @WhyId AND UserProfileId = @UserProfileId";
+                    cmd.Parameters.AddWithValue("@Description", why.Description);
+                    cmd.Parameters.AddWithValue("@WhyId", why.Id);
+                    cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
+
 
                     cmd.ExecuteNonQuery();
                 }
