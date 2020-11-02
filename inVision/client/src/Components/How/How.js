@@ -55,7 +55,7 @@ export default function How({ how }) {
                     <ModalFooter>
                         <Container>
                             <Button color="success" onClick={Complete} size="lg">Complete!</Button>{' '}
-                            <Button color="warning" onClick={Edit} size="lg">Edit</Button>{' '}
+                            <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
                             <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
                         </Container>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>

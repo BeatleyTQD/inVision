@@ -25,13 +25,14 @@ export default function WhyList() {
     }
     return (
         <Container>
-            <h2>Why?</h2>
+            <h2>Why Am I Doing This?</h2>
+            <br />
             <div>
                 {whys.map((why) => (
                     <Why key={why.id} why={why} />
                 ))}
             </div>
-            <Button onClick={Add} color="success" size="lg" block>Add Why <br /><HiPlus /></Button>
+            <Button onClick={Add} color="warning" size="lg" block>Add Why <br /><HiPlus /></Button>
             <Button onClick={GoBack} size="lg" block>Back to Dream</Button>
         </Container>
     )

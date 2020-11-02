@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
 
@@ -32,12 +32,14 @@ export default function Why({ why }) {
 
     return (
         <>
-            <Button color="warning" onClick={toggle} block>{why.description}</Button>
+            <Button outline color="info" onClick={toggle} block>{why.description}</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{why.description}</ModalHeader>
                 <ModalFooter>
-                    <Button color="primary" onClick={Edit}>Edit</Button>{' '}
-                    <Button color="danger" onClick={toggleNested}>Delete</Button>
+                    <Container>
+                        <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
+                        <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
+                    </Container>
                     <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                         <ModalHeader>Are you sure you want to delete?</ModalHeader>
                         <ModalFooter>

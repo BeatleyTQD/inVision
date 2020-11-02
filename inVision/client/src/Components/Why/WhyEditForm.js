@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 export default function WhyEditForm() {
     const { getSingleWhy, updateWhy } = useContext(WhyContext);
@@ -34,20 +34,19 @@ export default function WhyEditForm() {
     };
 
     return (
-        <>
-            <h2>new why</h2>
+        <Container>
+            <h2>Edit</h2>
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="description">Description</Label>
                         <Input id="description" type="text" value={why.description} onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={Update}>Save</Button>
-                        <Button onClick={Cancel}>Cancel</Button>
+                        <Button onClick={Update} color="success" size="lg" block>Save</Button>
+                        <Button onClick={Cancel} size="lg" block>Cancel</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
-        </>
+        </Container>
     )
 }

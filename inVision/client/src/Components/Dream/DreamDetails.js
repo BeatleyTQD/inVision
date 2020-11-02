@@ -80,6 +80,7 @@ export default function DreamDetails() {
     }
 
 
+
     return (
         <Container>
             <h1>{dream.name}</h1>
