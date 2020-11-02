@@ -4,7 +4,7 @@ import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 import { WhyContext } from '../../Providers/WhyProvider';
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, Container, Col, Row, InputGroup } from "reactstrap";
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -77,18 +77,21 @@ export default function DreamDetails() {
         return null;
     }
 
+
     return (
-        <>
+        <Container>
             <h1>{dream.name}</h1>
-            <Button color="secondary" onClick={allDreams}>all dreams</Button> <br />
-            <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
-            <br />
-            <Button color="link" onClick={toggle}>gimme a random how</Button>
+            <Button color="success" onClick={toggle} size="lg" block>gimme a random how</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>How much time ya got?</ModalHeader>
                 <ModalBody>
                     <FormGroup>
-                        <Input id="timeAvailable" type="number" onChange={handleIntFieldChange} />
+                        <InputGroup>
+                            <Input id="timeAvailable" type="number" onChange={handleIntFieldChange} />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText>minutes</InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>
@@ -104,19 +107,25 @@ export default function DreamDetails() {
                 </ModalFooter>
             </Modal>
             <h3>Active Hows</h3>
-            <div>
-                {hows.map((how) => (
-                    <How key={how.id} how={how} />
-                ))}
-            </div>
+            <Row>
+                <Col sm="6">
+                    {hows.map((how) => (
+                        <How key={how.id} how={how} />
+                    ))}
+                </Col>
+            </Row>
+            <Button color="primary" onClick={Add} size="lg" block>Add How</Button>{" "}
             <h3>Completed Hows</h3>
-            <div>
-                {completedHows.map((completedHow) => (
-                    <CompletedHow key={completedHow.id} completedHow={completedHow} />
-                ))}
-            </div>
+            <Row>
+                <Col>
+                    {completedHows.map((completedHow) => (
+                        <CompletedHow key={completedHow.id} completedHow={completedHow} />
+                    ))}
+                </Col>
+            </Row>
             <h4>{why.description}</h4>
-            <Button color="link" onClick={Whys}>remind me why</Button>
-        </>
+            <Button color="link" onClick={Whys} size="lg" block>Why Am I Doing This Again?</Button>
+            <Button color="secondary" onClick={allDreams} size="lg" block>What else am I working on?</Button>
+        </Container>
     )
 }

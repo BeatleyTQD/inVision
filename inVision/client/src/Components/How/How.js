@@ -48,7 +48,7 @@ export default function How({ how }) {
     return (
         <>
             <div>
-                <Button color="link" onClick={toggle}>{how.description}</Button>
+                <Button outline color="info" onClick={toggle} block>{how.description} <br />{how.timeToComplete} Minutes</Button>
                 <Modal isOpen={modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
                     <ModalFooter>
@@ -64,7 +64,7 @@ export default function How({ how }) {
                         </Modal>
                     </ModalFooter>
                 </Modal>
-                {how.timeToComplete} Minutes
+
             </div>
             <br />
         </>

@@ -3,7 +3,7 @@ import Dream from '../Dream/Dream';
 import { UserProfileContext } from '../../Providers/UserProfileProvider';
 import { DreamContext } from '../../Providers/DreamProvider';
 import { useHistory } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col } from 'reactstrap';
 
 export default function DreamList() {
     const { logout } = useContext(UserProfileContext);
@@ -21,14 +21,20 @@ export default function DreamList() {
 
     return (
         <>
-            <h2>your wildest dreams</h2>
-            <Button color="primary" onClick={New}>new dream</Button>
-            <div>
-                {dreams.map((dream) => (
-                    <Dream key={dream.id} dream={dream} />
-                ))}
-            </div>
-            <Button color="warning" onClick={logout}>Logout</Button>
+            <Container>
+                <h2>your wildest dreams</h2>
+                <br />
+                <Button color="success" onClick={New} size="lg" block>Add Dream</Button>
+                <br />
+                <Row>
+                    <Col sm="6">
+                        {dreams.map((dream) => (
+                            <Dream key={dream.id} dream={dream} />
+                        ))}
+                    </Col>
+                </Row>
+                <Button color="warning" onClick={logout} size="lg" block>Logout</Button>
+            </Container>
         </>
     )
 }

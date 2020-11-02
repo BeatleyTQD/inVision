@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "reactstrap";
+import { Button, Card } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
 
@@ -11,7 +11,9 @@ export default function Dream({ dream }) {
     }
     return (
         <>
-            <Button color="link" onClick={Details}>{dream.name}</Button>
+            <Card body>
+                <Button color="link" onClick={Details}>{dream.name}</Button>
+            </Card>
             <br />
         </>
     )

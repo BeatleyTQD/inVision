@@ -50,7 +50,6 @@ namespace inVision.Controllers
             {
                 return NotFound();
             }
-
             return Ok(why);
         }
 

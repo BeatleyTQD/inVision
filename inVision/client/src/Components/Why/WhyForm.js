@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 export default function WhyForm() {
     const { addWhy } = useContext(WhyContext);
@@ -22,24 +22,25 @@ export default function WhyForm() {
     }
 
     const done = () => {
-        history.push(`/dreams/${id}/whys`)
+        why.dreamId = parseInt(id);
+        addWhy(why)
+            .then(history.push(`/dreams/${id}/whys`))
     }
 
     return (
-        <>
-            <h2>new why</h2>
+        <Container>
+            <h2>Why am I doing this?</h2>
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="description">Description</Label>
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveWhy} color="info">Add More</Button>
-                        <Button onClick={done}>Done</Button>
+                        <Button onClick={saveWhy} color="success" size="lg" block>Save and Add More</Button>
+                        <Button onClick={done} size="lg" block>Save and Finish</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
-        </>
+        </Container>
     )
 }

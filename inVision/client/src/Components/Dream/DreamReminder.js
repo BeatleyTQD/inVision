@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Container } from "reactstrap";
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { WhyContext } from '../../Providers/WhyProvider';
 
@@ -23,10 +23,17 @@ export default function DreamReminder() {
     }
 
     return (
-        <>
-            <h1>I set out to do this because...</h1>
-            <h4>{why.description}</h4>
-            <Button color="link" onClick={Details}>i have properly reflected</Button>
-        </>
+        <Container>
+            <h1>
+                I set out to <br />
+                <em>{why.dream.name}</em>
+                <br />because I want to...
+            </h1>
+            <br />
+
+            <h3>{why.description}</h3>
+            <br />
+            <Button color="success" onClick={Details} size="lg" block>Ah, yes.</Button>
+        </Container>
     )
 }
