@@ -29,15 +29,13 @@ namespace inVision.Controllers
         public IActionResult Get()
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
-            return Ok(_dreamRepository.GetActiveDreams(userId));
+            return Ok(_dreamRepository.GetActiveDreams(user.Id));
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
             var dream = _dreamRepository.GetById(id);
             if (dream == null)
@@ -45,7 +43,7 @@ namespace inVision.Controllers
                 return NotFound();
             }
 
-            if (dream.UserProfileId != userId)
+            if (dream.UserProfileId != user.Id)
             {
                 return Unauthorized();
             }
@@ -65,8 +63,7 @@ namespace inVision.Controllers
         {
             //wont let you hard code to delete someone else's dream, but doesn't make user aware, need to add in clarifying alert later
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
-            _dreamRepository.DeactivateDream(id, userId);
+            _dreamRepository.DeactivateDream(id, user.Id);
         }
     }
 }

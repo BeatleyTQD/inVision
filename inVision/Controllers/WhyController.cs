@@ -40,14 +40,17 @@ namespace inVision.Controllers
             UserProfile user = GetCurrentUserProfile();
 
             var why = _whyRepository.GetById(id, user.Id);
+
             if (why.Dream.UserProfileId != user.Id)
             {
                 return Unauthorized();
             }
+
             if (why == null)
             {
                 return NotFound();
             }
+
             return Ok(why);
         }
 
@@ -62,7 +65,7 @@ namespace inVision.Controllers
 
             if (why == null)
             {
-                return Unauthorized();
+                return NotFound();
             }
 
             if (why.Dream.UserProfileId != user.Id)
