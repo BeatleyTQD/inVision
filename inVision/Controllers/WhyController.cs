@@ -29,9 +29,8 @@ namespace inVision.Controllers
         public IActionResult Get(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
-            return Ok(_whyRepository.GetWhysForDream(id, userId));
+            return Ok(_whyRepository.GetWhysForDream(id, user.Id));
         }
 
         [HttpGet]
@@ -39,11 +38,17 @@ namespace inVision.Controllers
         public IActionResult GetById(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
-            return Ok(_whyRepository.GetById(id, userId));
-
-           
+            var why = _whyRepository.GetById(id, user.Id);
+            if (why.Dream.UserProfileId != user.Id)
+            {
+                return Unauthorized();
+            }
+            if (why == null)
+            {
+                return NotFound();
+            }
+            return Ok(why);
         }
 
         [HttpGet]
@@ -51,9 +56,8 @@ namespace inVision.Controllers
         public IActionResult GetRandom(int id)
         {
             UserProfile user = GetCurrentUserProfile();
-            int userId = user.Id;
 
-            return Ok(_whyRepository.GetRandomWhy(id, userId));
+            return Ok(_whyRepository.GetRandomWhy(id, user.Id));
         }
 
         [HttpPost]
