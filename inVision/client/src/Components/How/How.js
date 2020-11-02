@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalFooter, ButtonGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ButtonGroup, Container } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
@@ -50,13 +50,14 @@ export default function How({ how }) {
             <div>
                 <Button outline color="info" onClick={toggle} block>{how.description} <br />{how.timeToComplete} Minutes</Button>
                 <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
+                    <ModalHeader toggle={toggle}>Do you want to...</ModalHeader>
+                    <ModalBody><h4>{how.description}</h4></ModalBody>
                     <ModalFooter>
-                        <ButtonGroup size="lg">
-                            <Button color="success" onClick={Complete}>Complete!</Button>{' '}
-                            <Button color="warning" onClick={Edit}>Edit</Button>{' '}
-                            <Button color="danger" onClick={toggleNested}>Delete</Button>
-                        </ButtonGroup>
+                        <Container>
+                            <Button color="success" onClick={Complete} size="lg">Complete!</Button>{' '}
+                            <Button color="warning" onClick={Edit} size="lg">Edit</Button>{' '}
+                            <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
+                        </Container>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                             <ModalHeader>Are you sure you want to delete?</ModalHeader>
                             <ModalFooter>

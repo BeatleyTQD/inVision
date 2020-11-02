@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import Why from '.././Why/Why';
 import { WhyContext } from '../../Providers/WhyProvider';
+import { HiPlus } from "react-icons/hi";
+
 
 export default function WhyList() {
     const { id } = useParams();
@@ -24,13 +26,13 @@ export default function WhyList() {
     return (
         <Container>
             <h2>Why?</h2>
-            <Button onClick={GoBack} size="lg" block>i am done membering</Button>
-            <Button onClick={Add} size="lg" block>Add Why</Button>
             <div>
                 {whys.map((why) => (
                     <Why key={why.id} why={why} />
                 ))}
             </div>
+            <Button onClick={Add} color="success" size="lg" block>Add Why <br /><HiPlus /></Button>
+            <Button onClick={GoBack} size="lg" block>Back to Dream</Button>
         </Container>
     )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { Button, Container } from "reactstrap";
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { WhyContext } from '../../Providers/WhyProvider';
+import { HiArrowNarrowRight } from "react-icons/hi";
 
 export default function DreamReminder() {
     const [why, setWhy] = useState();
@@ -33,7 +34,7 @@ export default function DreamReminder() {
 
             <h3>{why.description}</h3>
             <br />
-            <Button color="success" onClick={Details} size="lg" block>Ah, yes.</Button>
+            <Button color="success" onClick={Details} size="lg" block><HiArrowNarrowRight /></Button>
         </Container>
     )
 }

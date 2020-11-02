@@ -5,7 +5,8 @@ import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 import { WhyContext } from '../../Providers/WhyProvider';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, Container, Col, Row, InputGroup, Card } from "reactstrap";
-import { HiLightBulb, HiPlus } from "react-icons/hi";
+import { HiLightBulb, HiPlus, HiClipboardCheck, HiArrowLeft } from "react-icons/hi";
+import { FiMoreHorizontal } from "react-icons/fi";
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -81,8 +82,8 @@ export default function DreamDetails() {
 
     return (
         <Container>
-
             <h1>{dream.name}</h1>
+            <br />
 
             <div>
                 <Button color="success" onClick={toggle} size="lg" block>What should I do? <br /> <HiLightBulb /></Button>
@@ -105,7 +106,7 @@ export default function DreamDetails() {
                             <ModalHeader>Why don'tcha</ModalHeader>
                             <ModalBody>{randomHow && randomHow.description}</ModalBody>
                             <ModalFooter>
-                                <Button outline color="success" onClick={toggleAll} block>It shall be done!</Button>{' '}
+                                <Button color="success" onClick={toggleAll} block>It shall be done!</Button>{' '}
                             </ModalFooter>
                         </Modal>
                     </ModalFooter>
@@ -114,18 +115,20 @@ export default function DreamDetails() {
 
             <div>
                 <Row>
-                    <Col sm="6">
+                    <Col>
                         {hows.map((how) => (
                             <How key={how.id} how={how} />
                         ))}
                     </Col>
                 </Row>
-                <Button color="primary" onClick={Add} size="lg" block>Add How <br /> <HiPlus /></Button>{" "}
+                <Button color="info" onClick={Add} size="lg" block>Add How <br /> <HiPlus /></Button>{" "}
             </div>
             <br />
 
+            <Button color="warning" onClick={Whys} size="lg" block>Why? <br />{why.description} <br /> <FiMoreHorizontal /></Button>
+            <br />
             <Card>
-                <h3>Completed</h3>
+                <h3><HiClipboardCheck /></h3>
                 <Row>
                     <Col>
                         {completedHows.map((completedHow) => (
@@ -136,8 +139,8 @@ export default function DreamDetails() {
             </Card>
             <br />
 
-            <Button color="warning" onClick={Whys} size="lg" block>{why.description}</Button>
-            <Button color="secondary" onClick={allDreams} size="lg" block>Other Dreams</Button>
+            <Button color="secondary" onClick={allDreams} size="lg" block>Dream List <br /> <HiArrowLeft /> </Button>
+            <br />
         </Container>
     )
 }
