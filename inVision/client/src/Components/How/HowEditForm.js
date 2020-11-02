@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
 
 export default function HowEditForm() {
     const { getSingleHow, updateHow } = useContext(HowContext);
@@ -43,17 +43,21 @@ export default function HowEditForm() {
     };
 
     return (
-        <>
-            <h2>update how</h2>
+        <Container>
+            <h2>Edit</h2>
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="description">Description</Label>
                         <Input id="description" type="text" value={how.description} onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="timeToComplete">How Long Will It Take?</Label>
-                        <Input id="timeToComplete" type="number" value={how.timeToComplete} onChange={handleIntFieldChange} />
+                        <InputGroup>
+                            <Input id="timeToComplete" type="number" value={how.timeToComplete} onChange={handleIntFieldChange} />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText>minutes</InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
                     <FormGroup>
                         <Label for="isRepeatable">How Many Times Will You Do It?</Label>
@@ -63,11 +67,11 @@ export default function HowEditForm() {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={Update}>Save How</Button>
-                        <Button onClick={Cancel}>Cancel</Button>
+                        <Button onClick={Update} color="success" size="lg" block>Save</Button>
+                        <Button onClick={Cancel} size="lg" block>Cancel</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
-        </>
+        </Container>
     )
 }

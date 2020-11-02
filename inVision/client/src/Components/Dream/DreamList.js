@@ -4,6 +4,7 @@ import { UserProfileContext } from '../../Providers/UserProfileProvider';
 import { DreamContext } from '../../Providers/DreamProvider';
 import { useHistory } from 'react-router-dom';
 import { Button, Container, Row, Col } from 'reactstrap';
+import { HiOutlineMoon } from 'react-icons/hi'
 
 export default function DreamList() {
     const { logout } = useContext(UserProfileContext);
@@ -22,9 +23,7 @@ export default function DreamList() {
     return (
         <>
             <Container>
-                <h2>your wildest dreams</h2>
-                <br />
-                <Button color="success" onClick={New} size="lg" block>Add Dream</Button>
+                <h2>My Wildest Dreams</h2>
                 <br />
                 <Row>
                     <Col sm="6">
@@ -33,6 +32,8 @@ export default function DreamList() {
                         ))}
                     </Col>
                 </Row>
+                <Button color="success" onClick={New} size="lg" block>New Dream <br /><HiOutlineMoon /></Button>
+                <br />
                 <Button color="warning" onClick={logout} size="lg" block>Logout</Button>
             </Container>
         </>

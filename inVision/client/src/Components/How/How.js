@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalFooter, ButtonGroup } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
@@ -52,9 +52,11 @@ export default function How({ how }) {
                 <Modal isOpen={modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
                     <ModalFooter>
-                        <Button color="primary" onClick={Complete}>Complete!</Button>{' '}
-                        <Button color="secondary" onClick={Edit}>Edit</Button>{' '}
-                        <Button color="danger" onClick={toggleNested}>Delete</Button>
+                        <ButtonGroup size="lg">
+                            <Button color="success" onClick={Complete}>Complete!</Button>{' '}
+                            <Button color="warning" onClick={Edit}>Edit</Button>{' '}
+                            <Button color="danger" onClick={toggleNested}>Delete</Button>
+                        </ButtonGroup>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                             <ModalHeader>Are you sure you want to delete?</ModalHeader>
                             <ModalFooter>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { DreamContext } from '../../Providers/DreamProvider';
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
+
 export default function DreamForm() {
     const { addDream } = useContext(DreamContext);
     const [dream, setDream] = useState({ name: "", isDeactivated: 0, userProfileId: 0 })
@@ -31,12 +32,11 @@ export default function DreamForm() {
 
     return (
         <Container>
-            <h2>What greatness do you aspire to?</h2>
+            <h2>What Do You Dream Of?</h2>
             <br />
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="name">Name</Label>
                         <Input id="name" type="text" onChange={handleFieldChange} />
                     </FormGroup>
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useParams, useHistory } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
 import Why from '.././Why/Why';
 import { WhyContext } from '../../Providers/WhyProvider';
 
@@ -22,16 +22,15 @@ export default function WhyList() {
         history.push(`/dreams/${id}`)
     }
     return (
-        <>
-            <h2>member now?</h2>
-            <Button onClick={GoBack} color="info">i am done membering</Button>
-            <br />
-            <Button onClick={Add}>Add Why</Button>
+        <Container>
+            <h2>Why?</h2>
+            <Button onClick={GoBack} size="lg" block>i am done membering</Button>
+            <Button onClick={Add} size="lg" block>Add Why</Button>
             <div>
                 {whys.map((why) => (
                     <Why key={why.id} why={why} />
                 ))}
             </div>
-        </>
+        </Container>
     )
 }

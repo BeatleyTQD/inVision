@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, InputGroup, Container } from 'reactstrap';
 
 
 export default function HowForm() {
@@ -31,21 +31,27 @@ export default function HowForm() {
     }
 
     const done = () => {
-        history.push(`/dreams/${id}`);
+        how.dreamId = parseInt(id);
+        addHow(how)
+            .then(history.push(`/dreams/${id}`));
     };
 
     return (
-        <>
-            <h2>new how</h2>
+        <Container>
+            <h2>How?</h2>
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="description">Description</Label>
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="timeToComplete">How Long Will It Take?</Label>
-                        <Input id="timeToComplete" type="number" placeholder="in minutes" onChange={handleIntFieldChange} />
+                        <InputGroup>
+                            <Input id="timeToComplete" type="number" onChange={handleIntFieldChange} />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText>minutes</InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
                     <FormGroup>
                         <Label for="isRepeatable">How Many Times Will You Do It?</Label>
@@ -55,11 +61,11 @@ export default function HowForm() {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveHow} color="info">Add More</Button>
-                        <Button onClick={done}>Done</Button>
+                        <Button onClick={saveHow} color="success" size="lg" block>Save and Add More</Button>{" "}
+                        <Button onClick={done} size="lg" block>Save and Finish</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
-        </>
+        </Container>
     )
 }
