@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import Why from '.././Why/Why';
 import { WhyContext } from '../../Providers/WhyProvider';
-import { HiPlus } from "react-icons/hi";
+import { HiPlus, HiArrowLeft } from "react-icons/hi";
 
 
 export default function WhyList() {
@@ -11,9 +11,14 @@ export default function WhyList() {
     const history = useHistory();
     const { whys, getDreamWhys } = useContext(WhyContext);
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     useEffect(() => {
         const intId = parseInt(id)
-        getDreamWhys(intId);
+        getDreamWhys(intId)
+            .then(sleep(400));
     }, [])
 
     const Add = () => {
@@ -32,8 +37,8 @@ export default function WhyList() {
                     <Why key={why.id} why={why} />
                 ))}
             </div>
-            <Button onClick={Add} color="warning" size="lg" block>Add Why <br /><HiPlus /></Button>
-            <Button onClick={GoBack} size="lg" block>Back to Dream</Button>
+            <Button onClick={Add} color="success" size="lg" block>Add Why <br /><HiPlus /></Button>
+            <Button onClick={GoBack} size="lg" block>Back to Dream <br /> <HiArrowLeft /></Button>
         </Container>
     )
 }

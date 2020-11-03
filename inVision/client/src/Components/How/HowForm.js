@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
 import { Button, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, InputGroup, Container } from 'reactstrap';
+import { HiPlus, HiOutlineCheck } from "react-icons/hi";
 
 
 export default function HowForm() {
@@ -61,8 +62,8 @@ export default function HowForm() {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveHow} color="success" size="lg" block>Save and Add More</Button>{" "}
-                        <Button onClick={done} size="lg" block>Save and Finish</Button>
+                        <Button onClick={saveHow} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>{" "}
+                        <Button onClick={done} size="lg" block>Save and Finish <br /> <HiOutlineCheck /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>

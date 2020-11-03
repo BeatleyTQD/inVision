@@ -9,6 +9,10 @@ export default function HowEditForm() {
     const { id } = useParams();
     const history = useHistory();
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    };
+
     useEffect(() => {
         getSingleHow(id)
             .then(setHow);
@@ -35,6 +39,7 @@ export default function HowEditForm() {
             isRepeatable: how.isRepeatable
         };
         updateHow(editedHow)
+            .then(sleep(400))
             .then(() => history.push(`/dreams/${how.dreamId}`));
     };
 

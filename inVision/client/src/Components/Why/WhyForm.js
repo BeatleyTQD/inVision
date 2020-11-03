@@ -2,12 +2,18 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { HiPlus, HiOutlineCheck } from "react-icons/hi";
+
 
 export default function WhyForm() {
     const { addWhy } = useContext(WhyContext);
     const [why, setWhy] = useState({ description: "" });
     const { id } = useParams();
     const history = useHistory();
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
 
     const handleFieldChange = evt => {
         const stateToChange = { ...why };
@@ -24,6 +30,7 @@ export default function WhyForm() {
     const done = () => {
         why.dreamId = parseInt(id);
         addWhy(why)
+            .then(sleep(400))
             .then(history.push(`/dreams/${id}/whys`))
     }
 
@@ -36,8 +43,8 @@ export default function WhyForm() {
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={saveWhy} color="success" size="lg" block>Save and Add More</Button>
-                        <Button onClick={done} size="lg" block>Save and Finish</Button>
+                        <Button onClick={saveWhy} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>
+                        <Button onClick={done} size="lg" block>Save and Finish<br /> <HiOutlineCheck /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>

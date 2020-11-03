@@ -9,6 +9,10 @@ export default function WhyEditForm() {
     const { id } = useParams();
     const history = useHistory();
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     useEffect(() => {
         getSingleWhy(id)
             .then(setWhy);
@@ -26,6 +30,7 @@ export default function WhyEditForm() {
             description: why.description
         };
         updateWhy(editedWhy)
+            .then(sleep(400))
             .then(() => history.push(`/dreams/${why.dreamId}/whys`));
     };
 

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { BsTriangleHalf } from "react-icons/bs"
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
 
@@ -25,7 +26,7 @@ export default function Register() {
 
     return (
         <Container>
-            <h1>inVision</h1>
+            <h1>inVision <br /><BsTriangleHalf /></h1>
             <br />
             <Form onSubmit={registerClick}>
                 <fieldset>

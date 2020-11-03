@@ -22,7 +22,8 @@ namespace inVision.Repositories
                     cmd.CommandText = @"SELECT ch.Id AS CompletedId, ch.DateCompleted, h.Id AS HowId, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId 
                                           FROM CompletedHow ch 
                                           JOIN How h ON ch.HowId = h.Id 
-                                         WHERE h.DreamId = @dreamId";
+                                         WHERE h.DreamId = @dreamId
+                                      ORDER BY ch.DateCompleted DESC";
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
 
                     var reader = cmd.ExecuteReader();

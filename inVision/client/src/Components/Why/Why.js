@@ -11,6 +11,10 @@ export default function Why({ why }) {
     const [closeAll, setCloseAll] = useState(false);
     const toggle = () => setModal(!modal);
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     const toggleNested = () => {
         setNestedModal(!nestedModal);
         setCloseAll(false);
@@ -26,6 +30,7 @@ export default function Why({ why }) {
 
     const Delete = () => {
         deleteWhy(why.id)
+            .then(sleep(400))
             .then(getDreamWhys(why.dreamId))
             .then(toggleAll);
     };

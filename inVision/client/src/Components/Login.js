@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
+import { BsTriangleHalf } from "react-icons/bs"
 
 export default function Login() {
     const history = useHistory();
@@ -19,7 +20,7 @@ export default function Login() {
 
     return (
         <Container>
-            <h1>inVision</h1>
+            <h1>inVision <br /><BsTriangleHalf /></h1>
             <br />
             <Form onSubmit={loginSubmit}>
                 <fieldset>

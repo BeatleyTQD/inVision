@@ -135,6 +135,7 @@ export default function DreamDetails() {
                         {completedHows.map((completedHow) => (
                             <CompletedHow key={completedHow.id} completedHow={completedHow} />
                         ))}
+                        <br />
                     </Col>
                 </Row>
             </Card>

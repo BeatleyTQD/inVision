@@ -14,6 +14,10 @@ export default function How({ how }) {
     const [closeAll, setCloseAll] = useState(false);
     const toggle = () => setModal(!modal);
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     const toggleNested = () => {
         setNestedModal(!nestedModal);
         setCloseAll(false);
@@ -30,6 +34,7 @@ export default function How({ how }) {
 
     const Delete = () => {
         deleteHow(how.id)
+            .then(sleep(400))
             .then(toggleAll)
             .then(getActiveHows(how.dreamId));
     };
@@ -40,6 +45,7 @@ export default function How({ how }) {
             howId: how.id
         };
         addCompletedHow(completedHow)
+            .then(sleep(400))
             .then(toggle)
             .then(getActiveHows(how.dreamId))
             .then(getCompletedHows(how.dreamId));
