@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
+import { BsTriangleHalf } from "react-icons/bs"
 
 export default function Login() {
     const history = useHistory();
@@ -18,23 +19,27 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit}>
-            <fieldset>
-                <FormGroup>
-                    <Label for="email">Email</Label>
-                    <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                    <Button>Login</Button>
-                </FormGroup>
-                <em>
-                    Not registered? <Link to="register">Register</Link>
-                </em>
-            </fieldset>
-        </Form>
+        <Container>
+            <h1>inVision <br /><BsTriangleHalf /></h1>
+            <br />
+            <Form onSubmit={loginSubmit}>
+                <fieldset>
+                    <FormGroup>
+                        <Label for="email">Email</Label>
+                        <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button color="success" size="lg" block>Login</Button>
+                    </FormGroup>
+                    <em>
+                        Not registered? <Link to="register">Register</Link>
+                    </em>
+                </fieldset>
+            </Form>
+        </Container>
     );
 }

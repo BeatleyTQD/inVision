@@ -4,7 +4,9 @@ import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 import { WhyContext } from '../../Providers/WhyProvider';
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, Container, Col, Row, InputGroup, Card } from "reactstrap";
+import { HiLightBulb, HiPlus, HiClipboardCheck, HiArrowLeft } from "react-icons/hi";
+import { FiMoreHorizontal } from "react-icons/fi";
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -77,46 +79,70 @@ export default function DreamDetails() {
         return null;
     }
 
+
+
     return (
-        <>
+        <Container>
             <h1>{dream.name}</h1>
-            <Button color="secondary" onClick={allDreams}>all dreams</Button> <br />
-            <Button color="primary" onClick={Add}>CREATE NEW HOW</Button>{" "}
             <br />
-            <Button color="link" onClick={toggle}>gimme a random how</Button>
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>How much time ya got?</ModalHeader>
-                <ModalBody>
-                    <FormGroup>
-                        <Input id="timeAvailable" type="number" onChange={handleIntFieldChange} />
-                    </FormGroup>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="danger" onClick={randomHowSubmit}>Submit</Button>
-                    <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
-                        <ModalHeader>Why don'tcha</ModalHeader>
-                        <ModalBody>{randomHow && randomHow.description}</ModalBody>
-                        <ModalFooter>
-                            <Button color="danger" onClick={toggleAll}>It shall be done!</Button>{' '}
-                        </ModalFooter>
-                    </Modal>
-                    <Button color="primary" onClick={toggle}>Cancel</Button>{' '}
-                </ModalFooter>
-            </Modal>
-            <h3>Active Hows</h3>
+
             <div>
-                {hows.map((how) => (
-                    <How key={how.id} how={how} />
-                ))}
+                <Button color="success" onClick={toggle} size="lg" block>What should I do? <br /> <HiLightBulb /></Button>
+                <br />
+                <Modal isOpen={modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>How much time ya got?</ModalHeader>
+                    <ModalBody>
+                        <FormGroup>
+                            <InputGroup>
+                                <Input id="timeAvailable" type="number" onChange={handleIntFieldChange} />
+                                <InputGroupAddon addonType="append">
+                                    <InputGroupText>minutes</InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                        </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="success" onClick={randomHowSubmit} block>Submit!</Button>
+                        <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
+                            <ModalHeader>Why don'tcha</ModalHeader>
+                            <ModalBody>{randomHow && randomHow.description}</ModalBody>
+                            <ModalFooter>
+                                <Button color="success" onClick={toggleAll} block>It shall be done!</Button>{' '}
+                            </ModalFooter>
+                        </Modal>
+                    </ModalFooter>
+                </Modal>
             </div>
-            <h3>Completed Hows</h3>
+
             <div>
-                {completedHows.map((completedHow) => (
-                    <CompletedHow key={completedHow.id} completedHow={completedHow} />
-                ))}
+                <Row>
+                    <Col>
+                        {hows.map((how) => (
+                            <How key={how.id} how={how} />
+                        ))}
+                    </Col>
+                </Row>
+                <Button color="info" onClick={Add} size="lg" block>Add How <br /> <HiPlus /></Button>{" "}
             </div>
-            <h4>{why.description}</h4>
-            <Button color="link" onClick={Whys}>remind me why</Button>
-        </>
+            <br />
+
+            <Button color="warning" onClick={Whys} size="lg" block>Why? <br />{why.description} <br /> <FiMoreHorizontal /></Button>
+            <br />
+            <Card>
+                <h3><HiClipboardCheck /></h3>
+                <Row>
+                    <Col>
+                        {completedHows.map((completedHow) => (
+                            <CompletedHow key={completedHow.id} completedHow={completedHow} />
+                        ))}
+                        <br />
+                    </Col>
+                </Row>
+            </Card>
+            <br />
+
+            <Button color="secondary" onClick={allDreams} size="lg" block>Dream List <br /> <HiArrowLeft /> </Button>
+            <br />
+        </Container>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
 
@@ -10,6 +10,10 @@ export default function Why({ why }) {
     const [nestedModal, setNestedModal] = useState(false);
     const [closeAll, setCloseAll] = useState(false);
     const toggle = () => setModal(!modal);
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
 
     const toggleNested = () => {
         setNestedModal(!nestedModal);
@@ -26,18 +30,21 @@ export default function Why({ why }) {
 
     const Delete = () => {
         deleteWhy(why.id)
+            .then(sleep(400))
             .then(getDreamWhys(why.dreamId))
             .then(toggleAll);
     };
 
     return (
         <>
-            <Button color="link" onClick={toggle}>{why.description}</Button>
+            <Button outline color="info" onClick={toggle} block>{why.description}</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{why.description}</ModalHeader>
                 <ModalFooter>
-                    <Button color="primary" onClick={Edit}>Edit</Button>{' '}
-                    <Button color="danger" onClick={toggleNested}>Delete</Button>
+                    <Container>
+                        <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
+                        <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
+                    </Container>
                     <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                         <ModalHeader>Are you sure you want to delete?</ModalHeader>
                         <ModalFooter>

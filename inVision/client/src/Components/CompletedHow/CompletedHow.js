@@ -4,8 +4,12 @@ export default function CompletedHow({ completedHow }) {
     return (
         <>
             <div>
-                {completedHow.how.description} <br />
-                done on {new Intl.DateTimeFormat('en-US').format(new Date(completedHow.dateCompleted))}
+                <b>
+                    {completedHow.how.description}{" "}
+                </b>
+                <em>
+                    completed {new Intl.DateTimeFormat('en-US').format(new Date(completedHow.dateCompleted))}
+                </em>
             </div>
         </>
     )

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { DreamContext } from '../../Providers/DreamProvider';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+
 
 export default function DreamForm() {
     const { addDream } = useContext(DreamContext);
@@ -30,21 +31,21 @@ export default function DreamForm() {
     };
 
     return (
-        <>
-            <h2>new how</h2>
+        <Container>
+            <h2>What Do You Dream Of?</h2>
+            <br />
             <Form>
                 <fieldset>
                     <FormGroup>
-                        <Label for="name">Name</Label>
                         <Input id="name" type="text" onChange={handleFieldChange} />
                     </FormGroup>
 
                     <FormGroup>
-                        <Button onClick={saveDream}>Save</Button>
-                        <Button onClick={Cancel}>Cancel</Button>
+                        <Button onClick={saveDream} color="success" size="lg" block>Save and Continue</Button>{' '}
+                        <Button onClick={Cancel} size="lg" block>Cancel</Button>
                     </FormGroup>
                 </fieldset>
             </Form>
-        </>
+        </Container>
     )
 }

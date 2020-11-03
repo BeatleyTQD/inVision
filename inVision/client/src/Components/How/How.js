@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ButtonGroup, Container } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
@@ -13,6 +13,10 @@ export default function How({ how }) {
     const [nestedModal, setNestedModal] = useState(false);
     const [closeAll, setCloseAll] = useState(false);
     const toggle = () => setModal(!modal);
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
 
     const toggleNested = () => {
         setNestedModal(!nestedModal);
@@ -30,6 +34,7 @@ export default function How({ how }) {
 
     const Delete = () => {
         deleteHow(how.id)
+            .then(sleep(400))
             .then(toggleAll)
             .then(getActiveHows(how.dreamId));
     };
@@ -40,6 +45,7 @@ export default function How({ how }) {
             howId: how.id
         };
         addCompletedHow(completedHow)
+            .then(sleep(400))
             .then(toggle)
             .then(getActiveHows(how.dreamId))
             .then(getCompletedHows(how.dreamId));
@@ -48,13 +54,16 @@ export default function How({ how }) {
     return (
         <>
             <div>
-                <Button color="link" onClick={toggle}>{how.description}</Button>
+                <Button outline color="info" onClick={toggle} block>{how.description} <br />{how.timeToComplete} Minutes</Button>
                 <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>{how.description}</ModalHeader>
+                    <ModalHeader toggle={toggle}>Do you want to...</ModalHeader>
+                    <ModalBody><h4>{how.description}</h4></ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={Complete}>Complete!</Button>{' '}
-                        <Button color="secondary" onClick={Edit}>Edit</Button>{' '}
-                        <Button color="danger" onClick={toggleNested}>Delete</Button>
+                        <Container>
+                            <Button color="success" onClick={Complete} size="lg">Complete!</Button>{' '}
+                            <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
+                            <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
+                        </Container>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
                             <ModalHeader>Are you sure you want to delete?</ModalHeader>
                             <ModalFooter>
@@ -64,7 +73,7 @@ export default function How({ how }) {
                         </Modal>
                     </ModalFooter>
                 </Modal>
-                {how.timeToComplete} Minutes
+
             </div>
             <br />
         </>

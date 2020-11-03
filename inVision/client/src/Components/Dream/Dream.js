@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "reactstrap";
+import { Button, Card } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { ImCloud } from "react-icons/im";
 
 
 export default function Dream({ dream }) {
@@ -11,7 +12,7 @@ export default function Dream({ dream }) {
     }
     return (
         <>
-            <Button color="link" onClick={Details}>{dream.name}</Button>
+            <Button outline color="info" onClick={Details} size="lg" block>{dream.name} <br /> <ImCloud /></Button>
             <br />
         </>
     )
