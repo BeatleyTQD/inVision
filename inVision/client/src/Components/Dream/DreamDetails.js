@@ -11,6 +11,7 @@ import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
 export default function DreamDetails() {
+
     const [dream, setDream] = useState();
     const [why, setWhy] = useState();
     const [randomHow, setRandomHow] = useState();
@@ -19,7 +20,6 @@ export default function DreamDetails() {
     const { hows, getActiveHows, getRandomHow } = useContext(HowContext);
     const { completedHows, getCompletedHows } = useContext(CompletedHowContext);
     const { getRandomWhy } = useContext(WhyContext);
-
     const { id } = useParams();
     const history = useHistory();
 
