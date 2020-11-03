@@ -25,8 +25,8 @@ export default function DreamReminder() {
 
     return (
         <Container>
-            <h1>
-                I set out to <br />
+            <h1>I set out to
+                <br />
                 <em>{why.dream.name}</em>
                 <br />because I want to...
             </h1>

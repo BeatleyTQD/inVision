@@ -7,9 +7,76 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 2em 0em;
+  background-color: #fcfcfc;
+  color: #474747;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/*RANDOM/SUBMIT BUTTON*/
+.btn-success {
+  background-color: #4a7140 !important;
+  border-color: #4a7140 !important;
+}
+
+/*RANDOM/SUBMIT BUTTON*/
+.btn-success:focus, .btn-success.focus {
+  color: #fff;
+  background-color: #4a7140 !important;
+  border-color: #4a7140 !important;
+  box-shadow: 0 0 0 0rem;
+}
+
+/*HOW BUTTON*/
+.btn-outline-info {
+  color: #cc8759;
+  border-color:#cc8759;
+}
+
+/*HOW BUTTON*/
+.btn-outline-info:hover {
+  color: #ffffff;
+  border-color:#cc8759;
+  background-color: #cc8759;
+}
+
+/*HOW BUTTON*/
+.btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active, .show > .btn-outline-info.dropdown-toggle{
+  color: #ffffff;
+  border-color:#cc8759 !important;
+  background-color: #cc8759 !important;
+}
+
+/*HOW BUTTON*/
+.btn-outline-info:focus, .btn-outline-info.focus {
+  box-shadow: 0 0 0 0rem !important;
+}
+
+/*HOW ADD BUTTON*/
+.btn-info {
+  color: #fff;
+  background-color: #cc8759 !important;
+  border-color: #cc8759 !important;
+}
+
+/*DELETE BUTTON*/
+.btn-danger {
+  color: #fff;
+  background-color: #ad2e24 !important;
+  border-color: #ad2e24 !important;
+}
+
+.btn-warning {
+  color: #FFFFFF;
+  background-color: #264653 !important;
+  border-color: #264653 !important;
+}
+
+/*WHY BUTTON*/
+.btn-outline-warning {
+  color: #264653 !important;
+  border-color: #264653 !important;
 }

@@ -14,8 +14,8 @@ SET IDENTITY_INSERT [Dream] ON
 INSERT INTO [Dream]
     ([Id], [Name], [IsDeactivated], [UserProfileId])
 VALUES
-    (1, 'Become Youtuber', 0, 1),
-    (2, 'Run 20 Minute 5k', 0, 1),
+    (1, 'Become a Youtuber', 0, 1),
+    (2, 'Run a 20 Minute 5k', 0, 1),
     (3, 'Bench 1000 lbs', 0, 2),
     (4, 'Write a novel', 1, 2),
     (5, 'Start a podcast', 0, 1);

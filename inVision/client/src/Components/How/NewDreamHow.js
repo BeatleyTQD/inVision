@@ -62,6 +62,7 @@ export default function NewDreamHow() {
                             <option value={1}>Many</option>
                         </Input>
                     </FormGroup>
+                    <br />
                     <FormGroup>
                         <Button onClick={saveHow} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>{" "}
                         <Button onClick={done} size="lg" block>Get to Work! <br /> <HiOutlineCheck /></Button>
