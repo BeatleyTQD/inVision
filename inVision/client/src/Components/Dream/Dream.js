@@ -12,7 +12,7 @@ export default function Dream({ dream }) {
     }
     return (
         <>
-            <Button outline color="info" onClick={Details} size="lg" block>{dream.name} <br /> <ImCloud /></Button>
+            <Button outline color="success" onClick={Details} size="lg" block>{dream.name} <br /> <ImCloud /></Button>
             <br />
         </>
     )

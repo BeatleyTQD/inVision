@@ -22,6 +22,13 @@ code {
   border-color: #4a7140 !important;
 }
 
+/*DREAM LIST*/
+.btn-outline-success {
+  background-color: #ffffff !important;
+  border-color: #4a7140 !important;
+  color: #4a7140 !important;
+}
+
 /*RANDOM/SUBMIT BUTTON*/
 .btn-success:focus, .btn-success.focus {
   color: #fff;
@@ -34,6 +41,7 @@ code {
 .btn-outline-info {
   color: #cc8759;
   border-color:#cc8759;
+  background-color: #ffffff;
 }
 
 /*HOW BUTTON*/
@@ -70,7 +78,7 @@ code {
 }
 
 .btn-warning {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   background-color: #264653 !important;
   border-color: #264653 !important;
 }
@@ -79,4 +87,23 @@ code {
 .btn-outline-warning {
   color: #264653 !important;
   border-color: #264653 !important;
+  background-color: #FFFFFF;
+}
+
+.btn-outline-warning:hover {
+  color: #ffffff !important;
+  background-color:#264653 !important;
+  border-color: #264653 !important;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active, .show > .btn-outline-warning.dropdown-toggle {
+  color: #ffffff !important;
+  background-color: #264653 !important;
+  border-color: #264653 !important;
+}
+
+
+
+.btn-outline-warning:focus, .btn-outline-warning.focus {
+  box-shadow: 0 0 0 0rem !important;
 }
