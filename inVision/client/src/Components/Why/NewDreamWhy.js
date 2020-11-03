@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { WhyContext } from '../../Providers/WhyProvider';
@@ -5,7 +6,7 @@ import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { HiPlus, HiOutlineCheck } from "react-icons/hi";
 
 
-export default function WhyForm() {
+export default function NewDreamWhy() {
     const { addWhy } = useContext(WhyContext);
     const [why, setWhy] = useState({ description: "" });
     const { id } = useParams();
@@ -31,12 +32,12 @@ export default function WhyForm() {
         why.dreamId = parseInt(id);
         addWhy(why)
             .then(sleep(400))
-            .then(history.push(`/dreams/${id}/whys`))
+            .then(history.push(`/newDream/${id}/hows`))
     }
 
     return (
         <Container>
-            <h2>Why?</h2>
+            <h2>Why am I doing this?</h2>
             <br />
             <Form>
                 <fieldset>
@@ -45,7 +46,7 @@ export default function WhyForm() {
                     </FormGroup>
                     <FormGroup>
                         <Button onClick={saveWhy} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>
-                        <Button onClick={done} size="lg" block>Save and Finish<br /> <HiOutlineCheck /></Button>
+                        <Button onClick={done} size="lg" block>Save and Continue to How<br /> <HiOutlineCheck /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>

@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
 import { BsTriangleHalf } from "react-icons/bs"
+import { RiLoginBoxLine } from "react-icons/ri"
 
 export default function Login() {
     const history = useHistory();
@@ -33,7 +34,7 @@ export default function Login() {
                         <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Button color="success" size="lg" block>Login</Button>
+                        <Button color="success" size="lg" block>Login <br /><RiLoginBoxLine /></Button>
                     </FormGroup>
                     <em>
                         Not registered? <Link to="register">Register</Link>
