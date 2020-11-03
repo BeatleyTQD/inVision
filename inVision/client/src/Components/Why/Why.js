@@ -37,7 +37,7 @@ export default function Why({ why }) {
 
     return (
         <>
-            <Button outline color="info" onClick={toggle} block>{why.description}</Button>
+            <Button outline color="warning" onClick={toggle} block>{why.description}</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{why.description}</ModalHeader>
                 <ModalFooter>

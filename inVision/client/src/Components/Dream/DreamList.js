@@ -25,7 +25,7 @@ export default function DreamList() {
     return (
         <>
             <Container>
-                <h1>My Wildest Dreams<br /><BsTriangleHalf /></h1>
+                <h1>inVision <br /><BsTriangleHalf /></h1>
                 <br />
                 <Row>
                     <Col>

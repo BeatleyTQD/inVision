@@ -36,13 +36,14 @@ export default function WhyForm() {
 
     return (
         <Container>
-            <h2>Why?</h2>
+            <h2>Why Do I Want To Do This?</h2>
             <br />
             <Form>
                 <fieldset>
                     <FormGroup>
                         <Input id="description" type="text" onChange={handleFieldChange} />
                     </FormGroup>
+                    <br />
                     <FormGroup>
                         <Button onClick={saveWhy} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>
                         <Button onClick={done} size="lg" block>Save and Finish<br /> <HiOutlineCheck /></Button>
