@@ -5,7 +5,7 @@ import { Button, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText,
 import { HiPlus, HiOutlineCheck } from "react-icons/hi";
 
 
-export default function HowForm() {
+export default function NewDreamHow() {
     const { addHow } = useContext(HowContext);
     const [how, setHow] = useState({ description: "", timeToComplete: 0, isRepeatable: 0, dreamId: 0 })
     const { id } = useParams();
@@ -39,7 +39,7 @@ export default function HowForm() {
 
     return (
         <Container>
-            <h2>How?</h2>
+            <h2>How am I going to do it?</h2>
             <br />
             <Form>
                 <fieldset>
@@ -64,7 +64,7 @@ export default function HowForm() {
                     </FormGroup>
                     <FormGroup>
                         <Button onClick={saveHow} color="success" size="lg" block>Save and Add More <br /><HiPlus /></Button>{" "}
-                        <Button onClick={done} size="lg" block>Save and Finish <br /> <HiOutlineCheck /></Button>
+                        <Button onClick={done} size="lg" block>Get to Work! <br /> <HiOutlineCheck /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>

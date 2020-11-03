@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { BsTriangleHalf } from "react-icons/bs"
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
+import { RiLoginBoxLine } from "react-icons/ri"
 
 export default function Register() {
     const history = useHistory();
@@ -47,8 +48,11 @@ export default function Register() {
                         <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Button color="success" size="lg" block>Register</Button>
+                        <Button color="success" size="lg" block>Register<br /> <RiLoginBoxLine /></Button>
                     </FormGroup>
+                    <em>
+                        Already have an account? <Link to="login">Login</Link>
+                    </em>
                 </fieldset>
             </Form>
         </Container>

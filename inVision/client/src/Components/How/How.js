@@ -34,8 +34,8 @@ export default function How({ how }) {
 
     const Delete = () => {
         deleteHow(how.id)
-            .then(sleep(400))
             .then(toggleAll)
+            .then(sleep(400))
             .then(getActiveHows(how.dreamId));
     };
 

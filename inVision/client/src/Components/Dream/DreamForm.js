@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { DreamContext } from '../../Providers/DreamProvider';
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { HiArrowRight, HiArrowLeft } from "react-icons/hi"
 
 
 export default function DreamForm() {
@@ -21,7 +22,7 @@ export default function DreamForm() {
         dream.userProfileId = activeUser.id
         addDream(dream)
             .then((res) => {
-                history.push(`/dreams/${res.id}/whys/add`)
+                history.push(`/newDream/${res.id}/whys`)
             })
 
     }
@@ -41,8 +42,8 @@ export default function DreamForm() {
                     </FormGroup>
 
                     <FormGroup>
-                        <Button onClick={saveDream} color="success" size="lg" block>Save and Continue</Button>{' '}
-                        <Button onClick={Cancel} size="lg" block>Cancel</Button>
+                        <Button onClick={saveDream} color="success" size="lg" block>Save and Continue <br /><HiArrowRight /></Button>{' '}
+                        <Button onClick={Cancel} size="lg" block>Cancel <br /><HiArrowLeft /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>

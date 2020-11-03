@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { HowContext } from '../../Providers/HowProvider';
 import { Button, Form, FormGroup, Label, Input, Container, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
+import { HiOutlineCheck, HiArrowLeft } from 'react-icons/hi'
 
 export default function HowEditForm() {
     const { getSingleHow, updateHow } = useContext(HowContext);
@@ -72,8 +73,8 @@ export default function HowEditForm() {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Button onClick={Update} color="success" size="lg" block>Save</Button>
-                        <Button onClick={Cancel} size="lg" block>Cancel</Button>
+                        <Button onClick={Update} color="success" size="lg" block>Save<br /><HiOutlineCheck /></Button>
+                        <Button onClick={Cancel} size="lg" block>Cancel <br /><HiArrowLeft /></Button>
                     </FormGroup>
                 </fieldset>
             </Form>
