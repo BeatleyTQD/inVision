@@ -30,13 +30,13 @@ export default function WhyForm() {
     const done = () => {
         why.dreamId = parseInt(id);
         addWhy(why)
-            .then(sleep(400))
+            .then(sleep(500))
             .then(history.push(`/dreams/${id}/whys`))
     }
 
     return (
         <Container>
-            <h2>Why Do I Want To Do This?</h2>
+            <h2>Why?</h2>
             <br />
             <Form>
                 <fieldset>

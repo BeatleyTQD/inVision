@@ -30,7 +30,7 @@ export default function WhyEditForm() {
             description: why.description
         };
         updateWhy(editedWhy)
-            .then(sleep(400))
+            .then(sleep(500))
             .then(() => history.push(`/dreams/${why.dreamId}/whys`));
     };
 
@@ -41,11 +41,13 @@ export default function WhyEditForm() {
     return (
         <Container>
             <h2>Edit</h2>
+            <br />
             <Form>
                 <fieldset>
                     <FormGroup>
                         <Input id="description" type="text" value={why.description} onChange={handleFieldChange} />
                     </FormGroup>
+                    <br />
                     <FormGroup>
                         <Button onClick={Update} color="success" size="lg" block>Save</Button>
                         <Button onClick={Cancel} size="lg" block>Cancel</Button>

@@ -34,7 +34,7 @@ export default function DreamReminder() {
 
             <h3>{why.description}</h3>
             <br />
-            <Button color="success" onClick={Details} size="lg" block>Ah, yes. <br /><HiArrowRight /></Button>
+            <Button color="success" onClick={Details} size="lg" block> Continue<br /><HiArrowRight /></Button>
         </Container>
     )
 }
