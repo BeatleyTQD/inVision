@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, Container, Row, Col } from 'reactstrap';
 import { HiOutlineMoon } from 'react-icons/hi'
 import { RiLogoutBoxLine } from 'react-icons/ri'
-import { BsTriangleHalf } from 'react-icons/bs'
+import { GiAllSeeingEye } from 'react-icons/gi'
 
 export default function DreamList() {
     const { logout } = useContext(UserProfileContext);
@@ -25,7 +25,7 @@ export default function DreamList() {
     return (
         <>
             <Container>
-                <h1>inVision <br /><BsTriangleHalf /></h1>
+                <h1>inVision <br /><GiAllSeeingEye /></h1>
                 <br />
                 <Row>
                     <Col>

@@ -7,6 +7,8 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalFooter, ModalBody, Form, FormGroup, Label, Input, InputGroupAddon, InputGroupText, Container, Col, Row, InputGroup, Card } from "reactstrap";
 import { HiLightBulb, HiPlus, HiClipboardCheck, HiArrowLeft } from "react-icons/hi";
 import { FiMoreHorizontal } from "react-icons/fi";
+import { GiAllSeeingEye } from "react-icons/gi"
+
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -83,14 +85,14 @@ export default function DreamDetails() {
 
     return (
         <Container>
-            <h1>{dream.name}</h1>
+            <h1>{dream.name} <br /><GiAllSeeingEye /></h1>
             <br />
 
             <div>
                 <Button color="success" onClick={toggle} size="lg" block>What should I do? <br /> <HiLightBulb /></Button>
                 <br />
                 <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>How much time ya got?</ModalHeader>
+                    <ModalHeader toggle={toggle}>How much time do you have available?</ModalHeader>
                     <ModalBody>
                         <FormGroup>
                             <InputGroup>
@@ -104,7 +106,7 @@ export default function DreamDetails() {
                     <ModalFooter>
                         <Button color="success" onClick={randomHowSubmit} block>Submit!</Button>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
-                            <ModalHeader>Why don'tcha</ModalHeader>
+                            <ModalHeader>Why don't you...</ModalHeader>
                             <ModalBody>{randomHow && randomHow.description}</ModalBody>
                             <ModalFooter>
                                 <Button color="success" onClick={toggleAll} block>It shall be done!</Button>{' '}

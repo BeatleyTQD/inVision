@@ -30,9 +30,9 @@ export default function Why({ why }) {
 
     const Delete = () => {
         deleteWhy(why.id)
-            .then(sleep(400))
-            .then(getDreamWhys(why.dreamId))
-            .then(toggleAll);
+            .then(sleep(500))
+            .then(toggleAll)
+            .then(getDreamWhys(why.dreamId));
     };
 
     return (
@@ -42,7 +42,7 @@ export default function Why({ why }) {
                 <ModalHeader toggle={toggle}>{why.description}</ModalHeader>
                 <ModalFooter>
                     <Container>
-                        <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
+                        <Button color="primary" onClick={Edit} size="lg">Edit</Button>{' '}
                         <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
                     </Container>
                     <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>

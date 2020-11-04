@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
-import { BsTriangleHalf } from "react-icons/bs"
+import { GiAllSeeingEye } from "react-icons/gi"
 import { RiLoginBoxLine } from "react-icons/ri"
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
 
     return (
         <Container>
-            <h1>inVision <br /><BsTriangleHalf /></h1>
+            <h1>inVision <br /><GiAllSeeingEye /></h1>
             <br />
             <Form onSubmit={loginSubmit}>
                 <fieldset>

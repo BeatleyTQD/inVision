@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
-import { BsTriangleHalf } from "react-icons/bs"
+import { GiAllSeeingEye } from "react-icons/gi"
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../Providers/UserProfileProvider";
 import { RiLoginBoxLine } from "react-icons/ri"
@@ -27,7 +27,7 @@ export default function Register() {
 
     return (
         <Container>
-            <h1>inVision <br /><BsTriangleHalf /></h1>
+            <h1>inVision <br /><GiAllSeeingEye /></h1>
             <br />
             <Form onSubmit={registerClick}>
                 <fieldset>

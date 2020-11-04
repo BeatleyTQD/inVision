@@ -18,7 +18,6 @@ export default function WhyList() {
     useEffect(() => {
         const intId = parseInt(id)
         getDreamWhys(intId)
-            .then(sleep(400));
     }, [])
 
     const Add = () => {

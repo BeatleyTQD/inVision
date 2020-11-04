@@ -34,9 +34,9 @@ export default function How({ how }) {
 
     const Delete = () => {
         deleteHow(how.id)
-            .then(toggleAll)
-            .then(sleep(400))
-            .then(getActiveHows(how.dreamId));
+            .then(sleep(500))
+            .then(getActiveHows(how.dreamId))
+            .then(toggleAll);
     };
 
     const Complete = () => {
@@ -45,10 +45,10 @@ export default function How({ how }) {
             howId: how.id
         };
         addCompletedHow(completedHow)
-            .then(sleep(400))
-            .then(toggle)
             .then(getActiveHows(how.dreamId))
-            .then(getCompletedHows(how.dreamId));
+            .then(getCompletedHows(how.dreamId))
+            .then(sleep(500))
+            .then(toggle);
     }
 
     return (
@@ -61,7 +61,7 @@ export default function How({ how }) {
                     <ModalFooter>
                         <Container>
                             <Button color="success" onClick={Complete} size="lg">Complete!</Button>{' '}
-                            <Button color="secondary" onClick={Edit} size="lg">Edit</Button>{' '}
+                            <Button color="primary" onClick={Edit} size="lg">Edit</Button>{' '}
                             <Button color="danger" onClick={toggleNested} size="lg">Delete</Button>
                         </Container>
                         <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
