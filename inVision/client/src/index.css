@@ -39,21 +39,21 @@ code {
 
 /*HOW BUTTON*/
 .btn-outline-info {
-  color: #cc8759;
-  border-color:#cc8759;
-  background-color: #ffffff;
+  color: #cc8759 !important;
+  border-color:#cc8759 !important;
+  background-color: #ffffff !important;
 }
 
 /*HOW BUTTON*/
 .btn-outline-info:hover {
-  color: #ffffff;
-  border-color:#cc8759;
-  background-color: #cc8759;
+  color: #ffffff !important;
+  border-color:#cc8759 !important;
+  background-color: #cc8759 !important;
 }
 
 /*HOW BUTTON*/
 .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active, .show > .btn-outline-info.dropdown-toggle{
-  color: #ffffff;
+  color: #ffffff !important;
   border-color:#cc8759 !important;
   background-color: #cc8759 !important;
 }
@@ -110,13 +110,13 @@ code {
 
 /*BACK BUTTON*/
 .btn-secondary {
-  color: #fff;
-  background-color:#514538;
-  border-color: #514538;
+  color: #fff !important;
+  background-color:#514538 !important;
+  border-color: #514538 !important;
 }
 
 .btn-primary {
-  color: #ffffff;
-  background-color: #e09f3e;
-  border-color: #e09f3e;
+  color: #ffffff !important;
+  background-color: #e09f3e !important;
+  border-color: #e09f3e !important;
 }
