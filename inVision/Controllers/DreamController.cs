@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace inVision.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DreamController : Controller

@@ -32,23 +32,23 @@ export default function How({ how }) {
         history.push(`/how/edit/${how.id}`)
     };
 
-    const Delete = () => {
+    async function Delete() {
         deleteHow(how.id)
-            .then(sleep(500))
-            .then(getActiveHows(how.dreamId))
-            .then(toggleAll);
+        await sleep(300);
+        toggleAll();
+        getActiveHows(how.dreamId);
     };
 
-    const Complete = () => {
+    async function Complete() {
         const completedHow = {
             dateCompleted: new Date(),
             howId: how.id
         };
         addCompletedHow(completedHow)
-            .then(getActiveHows(how.dreamId))
-            .then(getCompletedHows(how.dreamId))
-            .then(sleep(500))
-            .then(toggle);
+        await sleep(300);
+        toggle();
+        getActiveHows(how.dreamId);
+        getCompletedHows(how.dreamId);
     }
 
     return (

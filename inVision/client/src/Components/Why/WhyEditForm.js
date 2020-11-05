@@ -24,13 +24,13 @@ export default function WhyEditForm() {
         setWhy(stateToChange);
     };
 
-    const Update = () => {
+    async function Update() {
         const editedWhy = {
             id: parseInt(id),
             description: why.description
         };
         updateWhy(editedWhy)
-            .then(sleep(500))
+        await sleep(300)
             .then(() => history.push(`/dreams/${why.dreamId}/whys`));
     };
 

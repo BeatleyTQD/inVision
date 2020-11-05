@@ -11,6 +11,10 @@ export default function HowForm() {
     const { id } = useParams();
     const history = useHistory();
 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
     const handleFieldChange = evt => {
         const stateToChange = { ...how };
         stateToChange[evt.target.id] = evt.target.value;
@@ -31,9 +35,10 @@ export default function HowForm() {
                 document.getElementById("isRepeatable").value = 0)
     }
 
-    const done = () => {
+    async function done() {
         how.dreamId = parseInt(id);
-        addHow(how)
+        addHow(how);
+        await sleep(300)
             .then(history.push(`/dreams/${id}`));
     };
 
