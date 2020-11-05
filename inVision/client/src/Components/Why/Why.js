@@ -28,11 +28,11 @@ export default function Why({ why }) {
         history.push(`/why/edit/${why.id}`)
     }
 
-    const Delete = () => {
+    async function Delete() {
         deleteWhy(why.id)
-            .then(sleep(500))
-            .then(toggleAll)
-            .then(getDreamWhys(why.dreamId));
+        await sleep(300);
+        toggleAll();
+        getDreamWhys(why.dreamId);
     };
 
     return (

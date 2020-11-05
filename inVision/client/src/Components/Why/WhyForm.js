@@ -27,11 +27,11 @@ export default function WhyForm() {
             .then(document.getElementById("description").value = "");
     }
 
-    const done = () => {
+    async function done() {
         why.dreamId = parseInt(id);
-        addWhy(why)
-            .then(sleep(500))
-            .then(history.push(`/dreams/${id}/whys`))
+        addWhy(why);
+        await sleep(300)
+            .then(history.push(`/dreams/${id}/whys`));
     }
 
     return (

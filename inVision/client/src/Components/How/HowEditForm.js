@@ -32,15 +32,15 @@ export default function HowEditForm() {
         setHow(stateToChange);
     };
 
-    const Update = () => {
+    async function Update() {
         const editedHow = {
             id: parseInt(id),
             description: how.description,
             timeToComplete: how.timeToComplete,
             isRepeatable: how.isRepeatable
         };
-        updateHow(editedHow)
-            .then(sleep(400))
+        updateHow(editedHow);
+        await sleep(300)
             .then(() => history.push(`/dreams/${how.dreamId}`));
     };
 
