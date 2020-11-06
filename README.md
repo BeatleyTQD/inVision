@@ -13,6 +13,7 @@ clone this repo ```git@github.com:BeatleyTQD/inVision.git```
 [Create a new SQL Database](https://github.com/BeatleyTQD/inVision/blob/main/SQL/01_Db_Create.sql)
 
 [Add in User Seed Data](https://github.com/BeatleyTQD/inVision/blob/main/SQL/02_Seed_Data.sql)
+
 Note you'll need to update the firebase user ids if you want to use the provided dummy data.
 
 ## Using inVision
@@ -20,7 +21,16 @@ Register a new account to log in.
 
 Once logged in select "New Dream" and follow the prompts add Whys and Hows.
 
-Once the dream is completed you'll be automatically directed to the main pillar of the app where you're able to see all potent
+Once the dream is completed you'll be automatically directed to the main pillar of the app. 
+
+At the top of the page is a "Tell Me What To Do" button. Clicking this will prompt you for your available time and upon input will query your list of active tasks based on that timeframe and return to you a random taks so you can get to work.
+
+From here you can perform see, edit, or delete your active Hows as well as add more as they arise. You are also able to "Complete" a task and generate a record of it in your "completed" log. 
+
+Beneath the Hows section is a randomly generated Why as a friendly reminder and a link to view, edit, and delete your complete list of Whys and add more as you see fit.
+
+From the main home page, navigating to an in progress dream will take you to a soft landing page with a randomly generated Why to remind you of why you set out on this journey in the first place.
+
 
 ## Technologies Used
 Visual Studio and Visual Studio Code
