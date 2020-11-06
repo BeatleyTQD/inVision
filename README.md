@@ -18,6 +18,7 @@ Note you'll need to update the firebase user ids if you want to use the provided
 
 ## Using inVision
 Designed to be viewed with the iPhone 6/7/8 Plus view mode, but will work with a regular browser (though a bit small).
+
 Register a new account to log in.
 
 Once logged in select "New Dream" and follow the prompts add Whys and Hows.
