@@ -21,6 +21,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { HiLightBulb } from 'react-icons/hi';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { ImCloud } from 'react-icons/im';
 
 export default function Dream({ dream }) {
   const history = useHistory();
@@ -59,53 +60,50 @@ export default function Dream({ dream }) {
   };
   return (
     <>
-      <Card>
-        <CardBody>
-          <Button color="success" onClick={Details} size="lg" block>
-            {dream.name} <br /> <FiMoreHorizontal />
+      <Button color="success" onClick={Details} size="lg" block>
+        {dream.name} <br /> <ImCloud />
+      </Button>
+      <Button color="info" onClick={toggle} block>
+        Quick Task <br /> <HiLightBulb />
+      </Button>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>
+          How much time do you have available?
+        </ModalHeader>
+        <ModalBody>
+          <FormGroup>
+            <InputGroup>
+              <Input
+                id="timeAvailable"
+                type="number"
+                onChange={handleIntFieldChange}
+              />
+              <InputGroupAddon addonType="append">
+                <InputGroupText>minutes</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </FormGroup>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={randomHowSubmit} block>
+            Submit!
           </Button>
-          <Button color="info" onClick={toggle} size="lg" block>
-            What should I do? <br /> <HiLightBulb />
-          </Button>
-          <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>
-              How much time do you have available?
-            </ModalHeader>
-            <ModalBody>
-              <FormGroup>
-                <InputGroup>
-                  <Input
-                    id="timeAvailable"
-                    type="number"
-                    onChange={handleIntFieldChange}
-                  />
-                  <InputGroupAddon addonType="append">
-                    <InputGroupText>minutes</InputGroupText>
-                  </InputGroupAddon>
-                </InputGroup>
-              </FormGroup>
-            </ModalBody>
+          <Modal
+            isOpen={nestedModal}
+            toggle={toggleNested}
+            onClosed={closeAll ? toggle : undefined}
+          >
+            <ModalHeader>Why don't you...</ModalHeader>
+            <ModalBody>{randomHow && randomHow.description}</ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={randomHowSubmit} block>
-                Submit!
-              </Button>
-              <Modal
-                isOpen={nestedModal}
-                toggle={toggleNested}
-                onClosed={closeAll ? toggle : undefined}
-              >
-                <ModalHeader>Why don't you...</ModalHeader>
-                <ModalBody>{randomHow && randomHow.description}</ModalBody>
-                <ModalFooter>
-                  <Button color="success" onClick={toggleAll} block>
-                    It shall be done!
-                  </Button>{' '}
-                </ModalFooter>
-              </Modal>
+              <Button color="success" onClick={toggleAll} block>
+                It shall be done!
+              </Button>{' '}
             </ModalFooter>
           </Modal>
-        </CardBody>
-      </Card>
+        </ModalFooter>
+      </Modal>
+      <br />
       <br />
     </>
   );
