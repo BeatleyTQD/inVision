@@ -20,9 +20,6 @@ namespace inVision.Models
         public int IsRepeatable { get; set; }
 
         [Required]
-        public int Importance { get; set; }
-
-        [Required]
         public int IsDeleted { get; set; }
 
         [Required]

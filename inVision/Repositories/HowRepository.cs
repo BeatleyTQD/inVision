@@ -121,7 +121,7 @@ namespace inVision.Repositories
 				                                           )
                                         AS HowOptions
                                         WHERE TimeToComplete <= @timeAvailable
-                                        ORDER BY NEWID();";
+                                        ORDER BY NEWID()";
 
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
