@@ -72,12 +72,21 @@ namespace inVision.Controllers
             return CreatedAtAction("Get", new { id = dream.Id }, dream);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("{id}")]
+        public IActionResult Delete(int id)
         {
             //wont let you hard code to delete someone else's dream, but doesn't make user aware, need to add in clarifying alert later
             UserProfile user = GetCurrentUserProfile();
             _dreamRepository.DeactivateDream(id, user.Id);
+            return NoContent();
         }
+
+        /*
+        [HttpPut("{id}")]
+        public IActionResult Put(Dream dream)
+        {
+
+        }
+        */
     }
 }

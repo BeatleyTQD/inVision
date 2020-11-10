@@ -57,10 +57,10 @@ export const DreamProvider = (props) => {
     );
   };
 
-  const deleteDream = (id) => {
+  const deactivateDream = (id) => {
     return getToken().then((token) => {
       fetch(`${apiUrl}/${id}`, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const DreamProvider = (props) => {
         getDream,
         getOthersDream,
         addDream,
-        deleteDream,
+        deactivateDream,
       }}
     >
       {props.children}

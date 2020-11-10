@@ -28,6 +28,7 @@ import {
 } from 'react-icons/hi';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { GiAllSeeingEye } from 'react-icons/gi';
+import { AiFillStop } from 'react-icons/ai';
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -36,17 +37,24 @@ export default function DreamDetails() {
   const [why, setWhy] = useState();
   const [randomHow, setRandomHow] = useState();
   const [timeAvailable, setTimeAvailable] = useState();
-  const { getDream } = useContext(DreamContext);
+  const { getDream, deactivateDream } = useContext(DreamContext);
   const { hows, getActiveHows, getRandomHow } = useContext(HowContext);
   const { completedHows, getCompletedHows } = useContext(CompletedHowContext);
   const { getRandomWhy } = useContext(WhyContext);
   const { id } = useParams();
   const history = useHistory();
 
+  const [deactivateModal, setDeactivateModal] = useState(false);
+
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
   const toggle = () => setModal(!modal);
+  const toggleDeactivate = () => setDeactivateModal(!deactivateModal);
+
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
 
   const toggleNested = () => {
     setNestedModal(!nestedModal);
@@ -76,6 +84,12 @@ export default function DreamDetails() {
       .then(setRandomHow)
       .then(toggleNested);
   };
+
+  async function deactivate() {
+    deactivateDream(id);
+    await sleep(300);
+    history.push(`/`);
+  }
 
   useEffect(() => {
     loadDream(id);
@@ -185,7 +199,25 @@ export default function DreamDetails() {
         </Row>
       </Card>
       <br />
-
+      <Button color="danger" onClick={toggleDeactivate} size="lg" block>
+        Stop Pursuing <br /> <AiFillStop />{' '}
+      </Button>
+      <Modal isOpen={deactivateModal} toggle={toggleDeactivate}>
+        <ModalHeader toggle={toggleDeactivate}>{dream.name}</ModalHeader>
+        <ModalBody>
+          Are you sure you want to stop pursuing this dream?
+        </ModalBody>
+        <ModalFooter>
+          <Container>
+            <Button color="danger" onClick={deactivate} size="lg">
+              Confirm
+            </Button>{' '}
+            <Button color="secondary" onClick={toggleDeactivate} size="lg">
+              Cancel
+            </Button>
+          </Container>
+        </ModalFooter>
+      </Modal>
       <Button color="secondary" onClick={allDreams} size="lg" block>
         Dream List <br /> <HiArrowLeft />{' '}
       </Button>

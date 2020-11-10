@@ -167,5 +167,24 @@ namespace inVision.Repositories
                 }
             }
         }
+
+        //soft delete
+        public void ReactivateDream(int dreamId, int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Dream 
+                                           SET IsDeactivated = 0
+                                         WHERE Id = @Id AND UserProfileId = @userProfileId";
+                    cmd.Parameters.AddWithValue("@Id", dreamId);
+                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
