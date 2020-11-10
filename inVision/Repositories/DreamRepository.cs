@@ -103,7 +103,7 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name, IsDeactivated, UserProfileId 
+                    cmd.CommandText = @"SELECT TOP 1 Id, Name, IsDeactivated, UserProfileId 
                                           FROM Dream 
                                          WHERE UserProfileId != @Id AND IsDeactivated = 0
                                          ORDER BY NEWID();";

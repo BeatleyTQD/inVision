@@ -52,7 +52,7 @@ namespace inVision.Controllers
             return Ok(dream);
         }
 
-        [HttpGet("OtherDreams/{id}")]
+        [HttpGet("OthersDream/{id}")]
         public IActionResult GetOthersDream(int id)
         {
             var othersDream = _dreamRepository.GetOthersDream(id);

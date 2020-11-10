@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin: 2em 0em;
+  margin: 3em 0em;
   background-color: #e9deca;
   color: #514538;
 }
@@ -16,10 +16,18 @@ code {
     monospace;
 }
 
-#dreamCard {
-  background-color: #e9deca;
+.otherDream {
+  color: #264653;
+  margin: 10em 0em 0em 0em;
 }
 
+.dreamReminderHeader {
+  margin: 0em 0em 2em 0em;
+}
+
+.dreamReminderBody {
+  margin: 0em 0em 2em 0em;
+}
 /*RANDOM/SUBMIT BUTTON*/
 .btn-success {
   background-color: #4a7140 !important;

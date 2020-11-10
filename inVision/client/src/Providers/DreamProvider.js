@@ -33,6 +33,17 @@ export const DreamProvider = (props) => {
     );
   };
 
+  const getOthersDream = (id) => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/OthersDream/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((resp) => resp.json())
+    );
+  };
+
   const addDream = (dream) => {
     return getToken().then((token) =>
       fetch(apiUrl, {
@@ -60,7 +71,14 @@ export const DreamProvider = (props) => {
 
   return (
     <DreamContext.Provider
-      value={{ dreams, getUserDreams, getDream, addDream, deleteDream }}
+      value={{
+        dreams,
+        getUserDreams,
+        getDream,
+        getOthersDream,
+        addDream,
+        deleteDream,
+      }}
     >
       {props.children}
     </DreamContext.Provider>
