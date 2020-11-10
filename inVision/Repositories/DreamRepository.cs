@@ -96,6 +96,41 @@ namespace inVision.Repositories
             }
         }
 
+        public Dream GetOthersDream(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, Name, IsDeactivated, UserProfileId 
+                                          FROM Dream 
+                                         WHERE UserProfileId != @Id AND IsDeactivated = 0
+                                         ORDER BY NEWID();";
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Dream dream = new Dream()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            IsDeactivated = DbUtils.GetInt(reader, "IsDeactivated"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                        };
+                        reader.Close();
+                        return dream;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+        
         public void Add(Dream dream)
         {
             using (var conn = Connection)

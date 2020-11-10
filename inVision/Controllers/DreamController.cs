@@ -52,6 +52,19 @@ namespace inVision.Controllers
             return Ok(dream);
         }
 
+        [HttpGet("OtherDreams/{id}")]
+        public IActionResult GetOthersDream(int id)
+        {
+            var othersDream = _dreamRepository.GetOthersDream(id);
+            if (othersDream == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(othersDream);
+        }
+
+
         [HttpPost]
         public IActionResult Post(Dream dream)
         {
