@@ -1,83 +1,134 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from 'react-router-dom';
 import { HowContext } from '../../Providers/HowProvider';
-import { Button, Form, FormGroup, Label, Input, Container, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
-import { HiOutlineCheck, HiArrowLeft } from 'react-icons/hi'
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Container,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+} from 'reactstrap';
+import { HiOutlineCheck, HiArrowLeft } from 'react-icons/hi';
 
 export default function HowEditForm() {
-    const { getSingleHow, updateHow } = useContext(HowContext);
-    const [how, setHow] = useState({ description: "", timeToComplete: 0, isRepeatable: 0 });
-    const { id } = useParams();
-    const history = useHistory();
+  const { getSingleHow, updateHow } = useContext(HowContext);
+  const [how, setHow] = useState({
+    description: '',
+    timeToComplete: 0,
+    isRepeatable: 0,
+    importance: 0,
+  });
+  const { id } = useParams();
+  const history = useHistory();
 
-    const sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds))
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  useEffect(() => {
+    getSingleHow(id).then(setHow);
+  }, []);
+
+  const handleFieldChange = (evt) => {
+    const stateToChange = { ...how };
+    stateToChange[evt.target.id] = evt.target.value;
+    setHow(stateToChange);
+  };
+
+  const handleIntFieldChange = (evt) => {
+    const stateToChange = { ...how };
+    stateToChange[evt.target.id] = parseInt(evt.target.value);
+    setHow(stateToChange);
+  };
+
+  async function Update() {
+    const editedHow = {
+      id: parseInt(id),
+      description: how.description,
+      timeToComplete: how.timeToComplete,
+      isRepeatable: how.isRepeatable,
+      importance: how.importance,
     };
+    updateHow(editedHow);
+    await sleep(300).then(() => history.push(`/dreams/${how.dreamId}`));
+  }
 
-    useEffect(() => {
-        getSingleHow(id)
-            .then(setHow);
-    }, []);
+  const Cancel = () => {
+    history.push(`/dreams/${how.dreamId}`);
+  };
 
-    const handleFieldChange = evt => {
-        const stateToChange = { ...how };
-        stateToChange[evt.target.id] = evt.target.value;
-        setHow(stateToChange);
-
-    };
-
-    const handleIntFieldChange = evt => {
-        const stateToChange = { ...how };
-        stateToChange[evt.target.id] = parseInt(evt.target.value);
-        setHow(stateToChange);
-    };
-
-    async function Update() {
-        const editedHow = {
-            id: parseInt(id),
-            description: how.description,
-            timeToComplete: how.timeToComplete,
-            isRepeatable: how.isRepeatable
-        };
-        updateHow(editedHow);
-        await sleep(300)
-            .then(() => history.push(`/dreams/${how.dreamId}`));
-    };
-
-    const Cancel = () => {
-        history.push(`/dreams/${how.dreamId}`);
-    };
-
-    return (
-        <Container>
-            <h2>Edit</h2>
-            <Form>
-                <fieldset>
-                    <FormGroup>
-                        <Input id="description" type="text" value={how.description} onChange={handleFieldChange} />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="timeToComplete">How Long Will It Take?</Label>
-                        <InputGroup>
-                            <Input id="timeToComplete" type="number" value={how.timeToComplete} onChange={handleIntFieldChange} />
-                            <InputGroupAddon addonType="append">
-                                <InputGroupText>minutes</InputGroupText>
-                            </InputGroupAddon>
-                        </InputGroup>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="isRepeatable">How Many Times Will You Do It?</Label>
-                        <Input type="select" name="select" id="isRepeatable" value={how.isRepeatable} onChange={handleIntFieldChange}>
-                            <option value={0}>Once</option>
-                            <option value={1}>Many</option>
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Button onClick={Update} color="success" size="lg" block>Save<br /><HiOutlineCheck /></Button>
-                        <Button onClick={Cancel} size="lg" block>Cancel <br /><HiArrowLeft /></Button>
-                    </FormGroup>
-                </fieldset>
-            </Form>
-        </Container>
-    )
+  return (
+    <Container>
+      <h2>Edit</h2>
+      <Form>
+        <fieldset>
+          <FormGroup>
+            <Input
+              id="description"
+              type="text"
+              value={how.description}
+              onChange={handleFieldChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="timeToComplete">How Long Will It Take?</Label>
+            <InputGroup>
+              <Input
+                id="timeToComplete"
+                type="number"
+                value={how.timeToComplete}
+                onChange={handleIntFieldChange}
+              />
+              <InputGroupAddon addonType="append">
+                <InputGroupText>minutes</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label for="isRepeatable">How Many Times Will You Do It?</Label>
+            <Input
+              type="select"
+              name="select"
+              id="isRepeatable"
+              value={how.isRepeatable}
+              onChange={handleIntFieldChange}
+            >
+              <option value={0}>Once</option>
+              <option value={1}>Many</option>
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="importance">
+              How Important Is It? <br />
+              {how.importance}
+            </Label>
+            <Input
+              type="range"
+              name="range"
+              id="importance"
+              min={0}
+              max={10}
+              value={how.importance}
+              onChange={handleIntFieldChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Button onClick={Update} color="success" size="lg" block>
+              Save
+              <br />
+              <HiOutlineCheck />
+            </Button>
+            <Button onClick={Cancel} size="lg" block>
+              Cancel <br />
+              <HiArrowLeft />
+            </Button>
+          </FormGroup>
+        </fieldset>
+      </Form>
+    </Container>
+  );
 }

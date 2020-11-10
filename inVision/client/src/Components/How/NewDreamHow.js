@@ -103,7 +103,8 @@ export default function NewDreamHow() {
               id="importance"
               min={0}
               max={10}
-              onChange={handleFieldChange}
+              value={how.importance}
+              onChange={handleIntFieldChange}
             />
           </FormGroup>
           <br />

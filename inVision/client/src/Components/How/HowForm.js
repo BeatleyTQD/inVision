@@ -20,6 +20,7 @@ export default function HowForm() {
     description: '',
     timeToComplete: 0,
     isRepeatable: 0,
+    importance: 5,
     dreamId: 0,
   });
   const { id } = useParams();
@@ -46,7 +47,8 @@ export default function HowForm() {
     addHow(how).then(
       (document.getElementById('description').value = ''),
       (document.getElementById('timeToComplete').value = ''),
-      (document.getElementById('isRepeatable').value = 0)
+      (document.getElementById('isRepeatable').value = 0),
+      (document.getElementById('importance').value = 5)
     );
   };
 
@@ -89,6 +91,20 @@ export default function HowForm() {
               <option value={0}>Once</option>
               <option value={1}>Many</option>
             </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="importance">
+              How Important Is It? <br />
+              {how.importance}
+            </Label>
+            <Input
+              type="range"
+              name="range"
+              id="importance"
+              min={0}
+              max={10}
+              onChange={handleIntFieldChange}
+            />
           </FormGroup>
           <br />
           <FormGroup>
