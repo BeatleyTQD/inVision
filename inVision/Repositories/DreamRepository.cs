@@ -53,6 +53,47 @@ namespace inVision.Repositories
             }
         }
 
+        public List<Dream> GetInactiveDreams(int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT d.Id , d.Name AS DreamName, d.IsDeactivated, d.UserProfileId,
+                                               up.UserName, up.Email
+                                          FROM Dream d
+                                          JOIN UserProfile up ON d.UserProfileId = up.Id
+                                         WHERE d.UserProfileId = @userProfileId AND d.IsDeactivated = 1";
+                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
+                    var reader = cmd.ExecuteReader();
+
+                    var dreams = new List<Dream>();
+
+                    while (reader.Read())
+                    {
+                        dreams.Add(new Dream()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "DreamName"),
+                            IsDeactivated = DbUtils.GetInt(reader, "IsDeactivated"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                UserName = DbUtils.GetString(reader, "UserName"),
+                                Email = DbUtils.GetString(reader, "Email")
+                            }
+                        });
+                    }
+
+                    reader.Close();
+
+                    return dreams;
+                }
+            }
+        }
+
         public Dream GetById(int id)
         {
             using (var conn = Connection)

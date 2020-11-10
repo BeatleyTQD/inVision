@@ -22,6 +22,19 @@ export const DreamProvider = (props) => {
     );
   };
 
+  const getInactiveDreams = () => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/Inactive`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((resp) => resp.json())
+        .then(setDreams)
+    );
+  };
+
   const getDream = (id) => {
     return getToken().then((token) =>
       fetch(`${apiUrl}/${id}`, {
@@ -69,15 +82,29 @@ export const DreamProvider = (props) => {
     });
   };
 
+  const reactivateDream = (id) => {
+    return getToken().then((token) => {
+      fetch(`${apiUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    });
+  };
+
   return (
     <DreamContext.Provider
       value={{
         dreams,
         getUserDreams,
+        getInactiveDreams,
         getDream,
         getOthersDream,
         addDream,
         deactivateDream,
+        reactivateDream,
       }}
     >
       {props.children}

@@ -12,10 +12,13 @@ export default function DreamReminder() {
   const { getOthersDream } = useContext(DreamContext);
   const { id } = useParams();
   const history = useHistory();
+  const userProfile = sessionStorage.getItem('userProfile');
+  const activeUser = JSON.parse(userProfile);
 
   useEffect(() => {
+    console.log(activeUser.id);
     getRandomWhy(id).then(setWhy);
-    getOthersDream(id).then(setDream);
+    getOthersDream(activeUser.id).then(setDream);
   }, []);
 
   const Details = () => {

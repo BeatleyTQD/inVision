@@ -33,6 +33,13 @@ namespace inVision.Controllers
             return Ok(_dreamRepository.GetActiveDreams(user.Id));
         }
 
+        [HttpGet("Inactive")]
+        public IActionResult GetInactive()
+        {
+            UserProfile user = GetCurrentUserProfile();
+            return Ok(_dreamRepository.GetInactiveDreams(user.Id));
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -81,12 +88,14 @@ namespace inVision.Controllers
             return NoContent();
         }
 
-        /*
+        
         [HttpPut("{id}")]
-        public IActionResult Put(Dream dream)
+        public IActionResult Reactivate(int id)
         {
-
+            UserProfile user = GetCurrentUserProfile();
+            _dreamRepository.ReactivateDream(id, user.Id);
+            return NoContent();
         }
-        */
+        
     }
 }
