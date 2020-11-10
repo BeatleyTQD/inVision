@@ -108,6 +108,23 @@ namespace inVision.Repositories
                 conn.Open();
                 using(var cmd = conn.CreateCommand())
                 {
+                    var timeLow = 0;
+                    var timeHigh = 0;
+                    if (timeAvailable <= 30)
+                    {
+                        timeLow = 0;
+                        timeHigh = timeAvailable;
+
+                    } else if (timeAvailable <= 60)
+                    {
+                        timeLow = 30;
+                        timeHigh = timeAvailable;
+                    } else
+                    {
+                        timeLow = 60;
+                        timeHigh = timeAvailable;
+                    }
+
                     cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, DreamId, Name, IsDeactivated, UserProfileId
                                                 FROM 
 		                                        (
@@ -120,12 +137,13 @@ namespace inVision.Repositories
 				                                           AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId AND h.IsDeleted = 0)
 				                                           )
                                         AS HowOptions
-                                        WHERE TimeToComplete <= @timeAvailable
+                                        WHERE TimeToComplete >= @timeLow AND TimeToComplete <= @timeHigh
                                         ORDER BY NEWID()";
 
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
-                    cmd.Parameters.AddWithValue("@timeAvailable", timeAvailable);
+                    cmd.Parameters.AddWithValue("@timeLow", timeLow);
+                    cmd.Parameters.AddWithValue("@timeHigh", timeHigh);
 
                     var reader = cmd.ExecuteReader();
 

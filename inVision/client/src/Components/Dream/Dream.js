@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { HowContext } from '../../Providers/HowProvider';
 import {
   Button,
@@ -11,16 +11,9 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { HiLightBulb } from 'react-icons/hi';
-import { FiMoreHorizontal } from 'react-icons/fi';
 import { ImCloud } from 'react-icons/im';
 
 export default function Dream({ dream }) {
@@ -58,6 +51,7 @@ export default function Dream({ dream }) {
       .then(setRandomHow)
       .then(toggleNested);
   };
+
   return (
     <>
       <Button color="success" onClick={Details} size="lg" block>
@@ -94,7 +88,10 @@ export default function Dream({ dream }) {
             onClosed={closeAll ? toggle : undefined}
           >
             <ModalHeader>Why don't you...</ModalHeader>
-            <ModalBody>{randomHow && randomHow.description}</ModalBody>
+            <ModalBody>
+              {randomHow && randomHow.description} <br />
+              {randomHow && randomHow.timeToComplete} Minutes
+            </ModalBody>
             <ModalFooter>
               <Button color="success" onClick={toggleAll} block>
                 It shall be done!

@@ -58,7 +58,12 @@ export default function NewDreamHow() {
       <Form>
         <fieldset>
           <FormGroup>
-            <Input id="description" type="text" onChange={handleFieldChange} />
+            <Input
+              id="description"
+              type="text"
+              placeholder="Ex. Steal Pizza Hut's recipe"
+              onChange={handleFieldChange}
+            />
           </FormGroup>
           <FormGroup>
             <Label for="timeToComplete">How Long Will It Take?</Label>
@@ -84,6 +89,10 @@ export default function NewDreamHow() {
               <option value={0}>Once</option>
               <option value={1}>Many</option>
             </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleRange">How Important Is It?</Label>
+            <Input type="range" name="range" id="exampleRange" />
           </FormGroup>
           <br />
           <FormGroup>

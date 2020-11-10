@@ -5,7 +5,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  ButtonGroup,
   Container,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';

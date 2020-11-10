@@ -3,16 +3,14 @@ import { DreamContext } from '../../Providers/DreamProvider';
 import { HowContext } from '../../Providers/HowProvider';
 import { CompletedHowContext } from '../../Providers/CompletedHowProvider';
 import { WhyContext } from '../../Providers/WhyProvider';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
   Button,
   Modal,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  Form,
   FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -30,7 +28,6 @@ import {
 } from 'react-icons/hi';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { GiAllSeeingEye } from 'react-icons/gi';
-
 import How from '.././How/How';
 import CompletedHow from '.././CompletedHow/CompletedHow';
 
@@ -141,7 +138,10 @@ export default function DreamDetails() {
               onClosed={closeAll ? toggle : undefined}
             >
               <ModalHeader>Why don't you...</ModalHeader>
-              <ModalBody>{randomHow && randomHow.description}</ModalBody>
+              <ModalBody>
+                {randomHow && randomHow.description} <br />
+                {randomHow && randomHow.timeToComplete} Minutes
+              </ModalBody>
               <ModalFooter>
                 <Button color="success" onClick={toggleAll} block>
                   It shall be done!
