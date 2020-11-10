@@ -23,28 +23,28 @@ SET IDENTITY_INSERT [Dream] OFF
 
 SET IDENTITY_INSERT [How] ON
 INSERT INTO [How]
-    ([Id], [Description], [TimeToComplete], [IsRepeatable], [IsDeleted], [DreamId])
+    ([Id], [Description], [TimeToComplete], [IsRepeatable], [Importance], [IsDeleted], [DreamId])
 VALUES
-    (1, 'Record a Video', 45, 1, 0, 1),
-    (2, 'Design Logo', 60, 0, 0, 1),
-    (3, 'Comission the intro song', 10, 0, 0, 1),
-    (4, 'Pick a training plan', 30, 0, 0, 2),
-    (5, 'Buy new shoes', 60, 0, 0, 2),
-    (6, 'Meal prep', 90, 1, 0, 2),
-    (7, 'Eat a lot', 60, 1, 0, 3),
-    (8, 'Learn to read', 90, 0, 0, 4),
-    (9, 'Backup old videos', 15, 1, 0, 1),
-    (10, 'Explore random Wikis', 30, 1, 0, 5),
-    (11, 'Email Kyle upcoming topic research', 15, 0, 0, 5),
-    (12, 'Update potential topic sheet', 30, 0, 0, 5),
-    (13, 'Check trending topics', 10, 1, 0, 1),
-    (14, 'Make video thumbnails', 30, 1, 0, 1),
-    (15, 'Stretch', 15, 1, 0, 2),
-    (16, 'Find new routes', 30, 1, 0, 2),
-    (17, 'Research potential guests', 60, 1, 0, 5),
-    (18, 'Write show intro song', 120, 0, 0, 5),
-    (19, 'Sign up for race', 10, 0, 0, 2),
-    (20, 'Listen to Check the Wire', 60, 1, 0, 1);
+    (1, 'Record a Video', 45, 1, 9, 0, 1),
+    (2, 'Design Logo', 60, 0, 4, 0, 1),
+    (3, 'Comission the intro song', 10, 0, 3, 0, 1),
+    (4, 'Pick a training plan', 30, 0, 6, 0, 2),
+    (5, 'Buy new shoes', 60, 0, 3, 0, 2),
+    (6, 'Meal prep', 90, 1, 8, 0, 2),
+    (7, 'Eat a lot', 60, 1, 10, 0, 3),
+    (8, 'Learn to read', 90, 0, 1, 0, 4),
+    (9, 'Backup old videos', 15, 1, 2, 0, 1),
+    (10, 'Explore random Wikis', 30, 1, 7, 0, 5),
+    (11, 'Email Kyle upcoming topic research', 15, 0, 8, 0, 5),
+    (12, 'Update potential topic sheet', 30, 0, 5, 0, 5),
+    (13, 'Check trending topics', 10, 1, 8, 0, 1),
+    (14, 'Make video thumbnails', 30, 1, 5, 0, 1),
+    (15, 'Stretch', 15, 1, 9, 0, 2),
+    (16, 'Find new routes', 30, 1, 5, 0, 2),
+    (17, 'Research potential guests', 60, 1, 7, 0, 5),
+    (18, 'Write show intro song', 120, 0, 8, 0, 5),
+    (19, 'Sign up for race', 10, 0, 3, 0, 2),
+    (20, 'Listen to Check the Wire', 60, 1, 2, 0, 1);
 
 SET IDENTITY_INSERT [How] OFF
 

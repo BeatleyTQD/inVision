@@ -63,6 +63,11 @@ export default function How({ how }) {
         <Button outline color="info" onClick={toggle} block>
           {how.description} <br />
           {how.timeToComplete} Minutes
+          {how.importance > 7 && (
+            <div>
+              <b style={{ color: 'green' }}>Prioritize!</b>
+            </div>
+          )}
         </Button>
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Do you want to...</ModalHeader>

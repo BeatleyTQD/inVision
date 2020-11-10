@@ -19,13 +19,14 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
+                    cmd.CommandText = @"SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.Importance, h.DreamId,
 				                                        d.Name, d.IsDeactivated, d.UserProfileId
                                                    FROM How h
                                                    JOIN Dream d ON h.DreamId = d.Id
                                                    LEFT JOIN CompletedHow ch ON h.Id = ch.HowId 
                                                    WHERE (ch.Id IS NULL OR h.IsRepeatable = 1)
-                                                   AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId AND IsDeleted = 0)";
+                                                   AND (h.DreamId = @dreamId AND d.UserProfileId = @userProfileId AND IsDeleted = 0)
+                                                   ORDER BY h.Importance DESC";
                     cmd.Parameters.AddWithValue("@dreamId", dreamId);
                     cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
 
@@ -40,6 +41,7 @@ namespace inVision.Repositories
                             Description = DbUtils.GetString(reader, "Description"),
                             TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
                             IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),
+                            Importance = DbUtils.GetInt(reader, "Importance"),
                             DreamId = DbUtils.GetInt(reader, "DreamId"),
                             Dream = new Dream()
                             {
@@ -63,7 +65,7 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT h.Id AS HowId, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
+                    cmd.CommandText = @"SELECT h.Id AS HowId, h.Description, h.TimeToComplete, h.IsRepeatable, h.Importance, h.DreamId,
 	                                           d.Name, d.IsDeactivated, d.UserProfileId
                                           FROM How h 
                                           JOIN Dream d ON h.DreamId = d.Id
@@ -80,6 +82,7 @@ namespace inVision.Repositories
                             Description = DbUtils.GetString(reader, "Description"),
                             TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
                             IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),
+                            Importance = DbUtils.GetInt(reader, "Importance"),
                             DreamId = DbUtils.GetInt(reader, "DreamId"),
                             Dream = new Dream()
                             {
@@ -121,14 +124,14 @@ namespace inVision.Repositories
                         timeHigh = timeAvailable;
                     } else
                     {
-                        timeLow = 60;
+                        timeLow = 45;
                         timeHigh = timeAvailable;
                     }
 
-                    cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, DreamId, Name, IsDeactivated, UserProfileId
+                    cmd.CommandText = @"SELECT TOP 1 Id, Description, TimeToComplete, IsRepeatable, Importance, DreamId, Name, IsDeactivated, UserProfileId
                                                 FROM 
 		                                        (
-				                                        SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.DreamId,
+				                                        SELECT DISTINCT h.Id, h.Description, h.TimeToComplete, h.IsRepeatable, h.Importance, h.DreamId,
 								                                        d.Name, d.IsDeactivated, d.UserProfileId
 				                                          FROM How h
 			                                              JOIN Dream d ON h.DreamId = d.Id
@@ -155,6 +158,7 @@ namespace inVision.Repositories
                             Description = DbUtils.GetString(reader, "Description"),
                             TimeToComplete = DbUtils.GetInt(reader, "TimeToComplete"),
                             IsRepeatable = DbUtils.GetInt(reader, "IsRepeatable"),
+                            Importance = DbUtils.GetInt(reader, "Importance"),
                             DreamId = DbUtils.GetInt(reader, "DreamId"),
                             Dream = new Dream()
                             {
@@ -183,12 +187,13 @@ namespace inVision.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO How (Description, TimeToComplete, IsRepeatable, IsDeleted, DreamId)
+                    cmd.CommandText = @"INSERT INTO How (Description, TimeToComplete, IsRepeatable, Importance, IsDeleted, DreamId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Description, @TimeToComplete, @IsRepeatable, 0, @DreamId)";
+                                        VALUES (@Description, @TimeToComplete, @IsRepeatable, @Importance, 0, @DreamId)";
                     cmd.Parameters.AddWithValue("@Description", how.Description);
                     cmd.Parameters.AddWithValue("@TimeToComplete", how.TimeToComplete);
                     cmd.Parameters.AddWithValue("@IsRepeatable", how.IsRepeatable);
+                    cmd.Parameters.AddWithValue("@Importance", how.Importance);
                     cmd.Parameters.AddWithValue("@DreamId", how.DreamId);
 
                     how.Id = (int)cmd.ExecuteScalar();
@@ -228,13 +233,15 @@ namespace inVision.Repositories
                     cmd.CommandText = @"UPDATE How
                                            SET How.Description = @Description,
                                                How.TimeToComplete = @TimeToComplete,
-                                               How.IsRepeatable = @IsRepeatable
+                                               How.IsRepeatable = @IsRepeatable,
+                                               How.Importance = @Importance
                                           FROM How JOIN Dream ON How.DreamId = Dream.Id
                                           JOIN UserProfile ON Dream.UserProfileId = UserProfile.Id
                                          WHERE How.Id = @HowId AND UserProfile.Id = @UserProfileId";
                     cmd.Parameters.AddWithValue("@Description", how.Description);
                     cmd.Parameters.AddWithValue("@TimeToComplete", how.TimeToComplete);
                     cmd.Parameters.AddWithValue("@IsRepeatable", how.IsRepeatable);
+                    cmd.Parameters.AddWithValue("@Importance", how.Importance);
                     cmd.Parameters.AddWithValue("@HowId", how.Id);
                     cmd.Parameters.AddWithValue("@UserProfileId", userProfileId);
 

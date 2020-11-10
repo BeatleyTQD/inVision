@@ -42,6 +42,7 @@ CREATE TABLE [How]
     [Description] NVARCHAR(255) NOT NULL,
     [TimeToComplete] INTEGER NOT NULL,
     [IsRepeatable] INTEGER NOT NULL,
+    [Importance] INTEGER NOT NULL,
     [IsDeleted] INTEGER NOT NULL,
     [DreamId] INTEGER NOT NULL,
 
