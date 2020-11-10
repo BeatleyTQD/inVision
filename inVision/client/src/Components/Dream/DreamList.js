@@ -7,6 +7,7 @@ import { Button, Container, Row, Col } from 'reactstrap';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { GiAllSeeingEye } from 'react-icons/gi';
+import { AiFillStop } from 'react-icons/ai';
 
 export default function DreamList() {
   const { logout } = useContext(UserProfileContext);
@@ -19,6 +20,10 @@ export default function DreamList() {
 
   const New = () => {
     history.push(`/addDream`);
+  };
+
+  const Inactive = () => {
+    history.push(`/InactiveDreams`);
   };
 
   return (
@@ -40,12 +45,14 @@ export default function DreamList() {
           New Dream <br />
           <HiOutlineMoon />
         </Button>
-        <br />
+        <Button color="danger" onClick={Inactive} size="lg" block>
+          Inactive Dreams <br />
+          <AiFillStop />
+        </Button>
         <Button color="secondary" onClick={logout} size="lg" block>
           Logout <br />
-          <RiLogoutBoxLine />{' '}
+          <RiLogoutBoxLine />
         </Button>
-        <br />
       </Container>
     </>
   );

@@ -89,7 +89,7 @@ namespace inVision.Controllers
         }
 
         
-        [HttpPut("{id}")]
+        [HttpPut("Reactivate/{id}")]
         public IActionResult Reactivate(int id)
         {
             UserProfile user = GetCurrentUserProfile();

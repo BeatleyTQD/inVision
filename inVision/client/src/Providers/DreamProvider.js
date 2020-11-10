@@ -5,6 +5,7 @@ export const DreamContext = createContext();
 
 export const DreamProvider = (props) => {
   const [dreams, setDreams] = useState([]);
+  const [inactiveDreams, setInactiveDreams] = useState([]);
   const { getToken } = useContext(UserProfileContext);
 
   const apiUrl = '/api/dream';
@@ -31,7 +32,7 @@ export const DreamProvider = (props) => {
         },
       })
         .then((resp) => resp.json())
-        .then(setDreams)
+        .then(setInactiveDreams)
     );
   };
 
@@ -84,7 +85,7 @@ export const DreamProvider = (props) => {
 
   const reactivateDream = (id) => {
     return getToken().then((token) => {
-      fetch(`${apiUrl}/${id}`, {
+      fetch(`${apiUrl}/Reactivate/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -98,6 +99,7 @@ export const DreamProvider = (props) => {
     <DreamContext.Provider
       value={{
         dreams,
+        inactiveDreams,
         getUserDreams,
         getInactiveDreams,
         getDream,
