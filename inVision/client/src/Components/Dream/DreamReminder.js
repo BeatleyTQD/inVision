@@ -16,7 +16,6 @@ export default function DreamReminder() {
   const activeUser = JSON.parse(userProfile);
 
   useEffect(() => {
-    console.log(activeUser.id);
     getRandomWhy(id).then(setWhy);
     getOthersDream(activeUser.id).then(setDream);
   }, []);

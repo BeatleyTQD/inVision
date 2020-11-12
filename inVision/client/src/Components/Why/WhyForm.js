@@ -28,7 +28,8 @@ export default function WhyForm() {
   async function done() {
     why.dreamId = parseInt(id);
     addWhy(why);
-    await sleep(300).then(history.push(`/dreams/${id}/whys`));
+    await sleep(300);
+    history.push(`/dreams/${id}/whys`);
   }
 
   return (

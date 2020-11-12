@@ -26,6 +26,10 @@ export default function NewDreamHow() {
   const { id } = useParams();
   const history = useHistory();
 
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
   const handleFieldChange = (evt) => {
     const stateToChange = { ...how };
     stateToChange[evt.target.id] = evt.target.value;
@@ -48,10 +52,12 @@ export default function NewDreamHow() {
     );
   };
 
-  const done = () => {
+  async function done() {
     how.dreamId = parseInt(id);
-    addHow(how).then(history.push(`/dreams/${id}`));
-  };
+    addHow(how);
+    await sleep(500);
+    history.push(`/dreams/${id}`);
+  }
 
   return (
     <Container>

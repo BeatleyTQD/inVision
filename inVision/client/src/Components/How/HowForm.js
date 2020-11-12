@@ -55,7 +55,8 @@ export default function HowForm() {
   async function done() {
     how.dreamId = parseInt(id);
     addHow(how);
-    await sleep(300).then(history.push(`/dreams/${id}`));
+    await sleep(250);
+    history.push(`/dreams/${id}`);
   }
 
   return (
